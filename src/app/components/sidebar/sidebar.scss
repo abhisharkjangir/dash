@@ -1,0 +1,29 @@
+@import "../../styles/theme";
+
+.sidebar {
+  background-color: var(--color-white);
+  height: calc(100vh - 55px);
+  position: fixed;
+  margin-top: 55px;
+  width: 250px;
+  border-right: 1px solid var(--color-grey);
+
+
+  ul {
+    padding-inline-start: 0px;
+    list-style: none;
+    margin: 0;
+    li {
+      padding: 10px 15px;
+      border-bottom:1px solid var(--color-grey);
+    }
+    li:hover {
+      padding: 10px 15px;
+      background-color: var(--color-grey);
+    }
+  }
+}
+
+// .sidebar:hover {
+//   // overflow-y: scroll;
+// }
