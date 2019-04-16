@@ -1,30 +1,17 @@
-import "@babel/polyfill";
-import React, { Component } from "react";
-import Header from "./components/header";
-import Footer from "./components/footer";
-import Sidebar from "./components/sidebar";
-import Routes from "./routes";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
+import { setAppData } from './appActions';
+import App from './app';
+import WithLocalStorage from './components/withLocalStorage';
 
-import "./styles/main.scss";
-import ScrollToTop from "./components/scrolltotop";
-
-class App extends Component {
-  render() {
-    return (
-      <ScrollToTop>
-        <div id="app">
-          <Header />
-          <div id="content" className="content">
-            <Sidebar />
-            <div className='main'>
-              <Routes />
-            </div>
-            <Footer />
-          </div>
-        </div>
-      </ScrollToTop>
-    );
-  }
+const mapStateToProps = (state) => {
+  return {...state.app};
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAppData: (data) => dispatch(setAppData(data))
+  };
+}
+
+export default WithLocalStorage(withRouter(connect(mapStateToProps, mapDispatchToProps)(App)));

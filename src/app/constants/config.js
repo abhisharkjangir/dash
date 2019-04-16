@@ -1,17 +1,17 @@
-import CONST from "./constants";
+import CONST from "./index";
 
 const STAG_ENV = {
-  URL: "http://18.224.169.160:8080",
+  URL: "http://18.224.169.160:8080/",
   env: "Staging"
 };
 
 const PROD_ENV = {
-  URL: "http://18.224.169.160:8080",
+  URL: "http://18.224.169.160:8080/",
   env: "Production"
 };
 
 const LOCAL_ENV = {
-  URL: "http://192.168.30.83:5000",
+  URL: "http://192.168.30.83:5000/",
   env: "Local"
 };
 

@@ -1,9 +1,19 @@
 import { combineReducers } from "redux";
 
 // Home Reducer
+import { APP_STATE_KEY } from "./app/appConstants";
+import AppReducer from "./app/appReducer";
+
+// Home Reducer
 import { HOME_STATE_KEY } from "./app/routes/home/HomeConstants";
 import HomeReducer from "./app/routes/home/HomeReducer";
 
+// Login Reducer
+import { LOGIN_STATE_KEY } from "./app/routes/login/loginConstants";
+import LoginReducer from "./app/routes/login/loginReducer";
+
 export default combineReducers({
-  [HOME_STATE_KEY]: HomeReducer
+  [APP_STATE_KEY]: AppReducer,
+  [HOME_STATE_KEY]: HomeReducer,
+  [LOGIN_STATE_KEY]: LoginReducer,
 });

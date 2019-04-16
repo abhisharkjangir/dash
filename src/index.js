@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import React from "react";
 import { render, hydrate } from "react-dom";
 import { Provider } from "react-redux";
@@ -6,6 +7,8 @@ import { Frontload } from "react-frontload";
 import { ConnectedRouter } from "connected-react-router";
 import createStore from "./store";
 import * as serviceWorker from "./serviceWorker";
+import 'react-toastify/dist/ReactToastify.css';
+import "./app/styles/main.scss";
 import App from "./app";
 
 // If you want your app to work offline and load faster, you can change

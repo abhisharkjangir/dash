@@ -11,7 +11,7 @@ class Home extends React.PureComponent {
   render() {
     return (
       <Page {...Meta.home}>
-
+  hi
       </Page>
     );
   }

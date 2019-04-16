@@ -37,6 +37,10 @@ button:active {
     padding: 15px;
     background-color: var(--color-grey);
   }
+  // Not Logged In
+  .main-guest-user {
+    background-color: var(--color-grey);
+  }
 }
 
 // Scrollbar ==================

@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Loadable from "react-loadable";
+import AuthenticatedRoute from "../components/authenticated-route";
+import UnauthenticatedRoute from "../components/unauthenticated-route";
 
 const Home = Loadable({
   loader: () => import(/* webpackChunkName: "home" */ "./home"),
@@ -29,10 +31,10 @@ const NotFound = Loadable({
 
 export default () => (
   <Switch>
-    <Route exact path="/" component={Home} />
-    <Route exact path="/signup" component={Signup} />
-    <Route exact path="/login" component={Login} />
-    <Route exact path="/forgotpassword" component={ForgotPassword} />
+    <AuthenticatedRoute exact path="/" component={Home} />
+    <UnauthenticatedRoute exact path="/signup" component={Signup} />
+    <UnauthenticatedRoute exact path="/login" component={Login} />
+    <UnauthenticatedRoute exact path="/forgotpassword" component={ForgotPassword} />
     <Route component={NotFound} />
   </Switch>
 );
