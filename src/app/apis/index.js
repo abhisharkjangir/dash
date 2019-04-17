@@ -1,5 +1,6 @@
 const APIS = {
   "login" : "signin",
+  "logout": "signout",
 };
 
 const getApiEndPoint = (name) => {

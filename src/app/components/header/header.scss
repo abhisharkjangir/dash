@@ -25,12 +25,16 @@
     flex-direction: column;
     align-items: center;
     i {
-      font-size: 16px;
+      font-size: var(--font-size-16);
       margin-bottom:3px;
     }
-    font-size: 12px;
+    font-size: var(--font-size-12);
     // padding: 9px 15px;
     border-left: 1px solid var(--color-grey);
+  }
+  .toggle:hover {
+    background-color: var(--color-grey);
+    cursor: pointer;
   }
 
   .menu {
@@ -49,10 +53,10 @@
         flex-direction: column;
         align-items: center;
         i {
-          font-size: 16px;
+          font-size: var(--font-size-16);
           margin-bottom:3px;
         }
-        font-size: 12px;
+        font-size: var(--font-size-12);
         padding: 9px 15px;
         border-left: 1px solid var(--color-grey);
       }

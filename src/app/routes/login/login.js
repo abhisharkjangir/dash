@@ -33,7 +33,7 @@ class Login extends React.Component {
     const { setLoginData, setLoggingIn, setAppData } = this.props;
 
     if(username && password) {
-      setLoggingIn();
+      setLoggingIn(true);
       const payload = {
         email : username,
         password
@@ -48,10 +48,12 @@ class Login extends React.Component {
           setLocalStorage('user', data);
         } else {
           toast.error(res.data.message);
+          setLoggingIn(false);
         }
       })
       .catch(err => {
         console.log(err);
+        setLoggingIn(false);
       });
     } else toast.error('All fields are required.');
   }

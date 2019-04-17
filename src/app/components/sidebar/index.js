@@ -1,23 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./sidebar.scss";
-import { Row, ContainerFluid } from "../layout";
+import { connect } from 'react-redux';
+import Sidebar from './sidebar';
+import { setAppData } from '../../appActions';
 
-class Sidebar extends React.PureComponent {
-  render() {
-    return (
-        <div className='sidebar'>
-          <ul>
-            <li>Dashboard</li>
-            <li>Users</li>
-            <li>Settings</li>
-            <li>Logout</li>
-            <li>About</li>
-            <li>Terms</li>
-          </ul>
-        </div>
-    );
-  }
-}
+const mapStateToProps = (state) => ({...state.app});
 
-export default Sidebar;
+const mapDispatchToProps = (dispatch) => ({
+  setAppData: (data) => dispatch(setAppData(data))
+});
+
+export default connect(mapStateToProps , mapDispatchToProps)(Sidebar);
+

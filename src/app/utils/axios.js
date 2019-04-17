@@ -1,11 +1,21 @@
 import axios from 'axios';
 import qs from 'query-string';
 import ENV from '../constants/config';
+import { getLocalStorage } from './common';
+
+// FETCH TOKEN from localStorage for every request
+const getAuthToken = () => {
+  const user = getLocalStorage('user');
+  if(user && user.token) {
+    return user.token;
+  }
+  return null;
+}
 
 const Axios = (baseURL) => {
   // AXIOS CONFIGRATION
   let config = {
-    baseURL : baseURL || ENV.URL,
+    baseURL : baseURL || ENV.BASE_URL,
     // timeout : 5000, //
     paramsSerializer: function(queryParams) {
       return qs.stringify(queryParams)
@@ -17,7 +27,7 @@ const Axios = (baseURL) => {
 
   // REQUEST INTERCEPTOR
   axiosInstance.interceptors.request.use((config) => {
-    config.headers['accessToken'] =  null;
+    config.headers['token'] =  getAuthToken();
     return config;
   }, (error) => {
     return Promise.reject(error);
@@ -25,7 +35,7 @@ const Axios = (baseURL) => {
 
   // RESPONSE INTERCEPTOR
   axiosInstance.interceptors.response.use((response) => {
-    if (4000 === response.data.status) { // RESPONSE_CODE CAN BE CAHNGE
+    if (response.data.success) { // RESPONSE_CODE CAN BE CAHNGE
 
     }
     return response;
@@ -36,4 +46,4 @@ const Axios = (baseURL) => {
 }
 
 // EXPORT A NEW AXIOS INSTANCE
-export default Axios(ENV.BASE_URL);
+export default Axios(ENV.URL);

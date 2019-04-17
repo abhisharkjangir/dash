@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, sidebar } = this.props;
     if(isLoggedIn) {
       return (
         <ScrollToTop>
@@ -27,10 +27,10 @@ class App extends Component {
             <Header />
             <div id="content" className="content">
               <Sidebar />
-              <div className='main'>
+              <div className={sidebar ? 'main' : 'main-no-sidebar'}>
                 <Routes />
               </div>
-              <Footer />
+              <Footer sidebar={sidebar}/>
             </div>
           </div>
         </ScrollToTop>

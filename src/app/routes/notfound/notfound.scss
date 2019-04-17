@@ -1,20 +1,35 @@
 @import "../../styles/theme";
 
-.notfound {
+.notfound-page {
   background: var(--color-grey);
-  width: 100%;
-  height: calc(100vh - 64px);
+  width: 100vw;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 15px;
+  .logo {
+    margin-bottom: 30px;
+    img {
+      width: 150px;
+      height: auto;
+    }
+  }
+
+  .box {
+    text-align: center;
+    padding: 30px 15px;
+    background-color: var(--color-white);
+    margin-bottom: 30px;
+  }
+
   h2 {
-    font-family: "chiller", sans-serif;
+    // font-family: "chiller", sans-serif;
     font-weight: bold;
     font-size: 70px;
   }
   p {
-    font-size: 12px;
+    font-size: var(--font-size-12);
   }
 }

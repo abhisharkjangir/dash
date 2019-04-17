@@ -34,6 +34,6 @@ export default {
   notfound: {
     id: "notfound",
     title: "Oops! 404",
-    description: "This is not the web page you are lokking for."
+    description: "This is not the web page you are looking for."
   }
 };

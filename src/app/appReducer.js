@@ -2,6 +2,7 @@ import { SET_APP_DATA } from './appConstants';
 
 const initialState = {
   isLoggedIn: false,
+  sidebar: true,
 };
 
 const reducer = (state = initialState, action) => {

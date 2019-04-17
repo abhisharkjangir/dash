@@ -8,7 +8,7 @@ const initialState = {
 const reducer = (state = initialState, action ) => {
   switch(action.type) {
     case SET_LOGGING_IN:
-      return { isLoggingIn : true, isLoggedIn: false }
+      return { isLoggingIn : action.value, isLoggedIn: false }
     case SET_DATA:
       return {...state, ...action.data, isLoggedIn: true, isLoggingIn: false};
     default:
