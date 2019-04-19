@@ -29,9 +29,16 @@ const NotFound = Loadable({
   loading: () => null
 });
 
+const Blogs = Loadable({
+  loader: () => import(/* webpackChunkName: "blogs" */ "./blogs"),
+  loading: () => null
+});
+
+
 export default () => (
   <Switch>
     <AuthenticatedRoute exact path="/" component={Home} />
+    <AuthenticatedRoute exact path="/blogs" component={Blogs} />
     <UnauthenticatedRoute exact path="/signup" component={Signup} />
     <UnauthenticatedRoute exact path="/login" component={Login} />
     <UnauthenticatedRoute exact path="/forgotpassword" component={ForgotPassword} />

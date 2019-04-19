@@ -2,15 +2,13 @@ import { LOGO } from "../assets/imgs";
 
 export default {
   default: {
-    title: "Abhishar Jangir",
-    description:
-      "JavaScript/Front-End/ReactJS Developer based in Gurugram India.",
+    title: "Meuzic",
+    description: "www.meuzic.com",
     image: LOGO,
-    twitter: "@abhishar_jangir",
-    sep: " - ",
-    siteURL: "http://abhijangir.me",
-    keywords:
-      "Abhishar, Abhishar Jangir, www.imabhi.in, imabhi,imabhi.in, Web developer, Front End Developer,front end developer, reactjs developer, javascript developer, Freelance web developer, HTML to PSD Developer, Responsive web developer, react js developer, react developer, react native developer, js developer, Javascript Developer",
+    twitter: "",
+    sep: " | ",
+    siteURL: "",
+    keywords:"",
     facebookAppId: "XXXXXXXXX",
     updated: new Date().toDateString(),
     published: new Date().toDateString(),
@@ -18,18 +16,23 @@ export default {
   },
   home: {
     id: "home",
-    title: "Home",
-    description: "Have a look on my recent projects"
+    title: "Dashboard",
+    description: "Dashboard"
   },
-  about: {
-    id: "about",
-    title: "About",
-    description: "Read More about Abhishar Jangir"
+  login: {
+    id: "login",
+    title: "Login",
+    description: "Login to Meuzic"
   },
-  contact: {
-    id: "contact",
-    title: "Contact",
-    description: "Get in touch"
+  signup: {
+    id: "signup",
+    title: "Signup",
+    description: "Signup on Meuzic"
+  },
+  forgetpassword: {
+    id: "forgotpassword",
+    title: "Forget Password",
+    description: "Forget Password"
   },
   notfound: {
     id: "notfound",

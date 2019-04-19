@@ -18,6 +18,10 @@
     li {
       padding: 10px 15px;
       border-bottom:1px solid var(--color-grey);
+      a {
+        text-decoration: none;
+        color: var(--color-z-black);
+      }
     }
     li:hover {
       cursor: pointer;

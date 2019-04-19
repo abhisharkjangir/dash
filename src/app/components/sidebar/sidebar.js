@@ -10,7 +10,7 @@ class Sidebar extends React.PureComponent {
       return (
         <div className='sidebar'>
           <ul>
-            <li>Dashboard</li>
+            <li><Link to='blogs'>Blogs</Link></li>
             <li>Users</li>
             <li>Settings</li>
             <li>Logout</li>
