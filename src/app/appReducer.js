@@ -1,16 +1,18 @@
-import { SET_APP_DATA } from './appConstants';
+import { SET_APP_DATA } from "./appConstants";
 
 const initialState = {
   isLoggedIn: false,
   sidebar: true,
+  categories: []
 };
 
 const reducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SET_APP_DATA:
-    return {...state, ...action.data};
-    default: return state;
+      return { ...state, ...action.data };
+    default:
+      return state;
   }
-}
+};
 
 export default reducer;

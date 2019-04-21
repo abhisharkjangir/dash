@@ -1,5 +1,6 @@
-export const BLOGS_STATE_KEY = 'blogs';
-export const NAMESPACE = 'BLOGS/';
+export const BLOGS_STATE_KEY = "blogs";
+export const NAMESPACE = "BLOGS/";
 export const FETCH_BLOGS = `${NAMESPACE}FETCH_BLOGS`;
 export const FETCH_BLOGS_SUCCESS = `${NAMESPACE}FETCH_BLOGS_SUCCESS`;
 export const FETCH_BLOGS_ERROR = `${NAMESPACE}FETCH_BLOGS_ERROR`;
+export const UPDATE_FILTERS = `${NAMESPACE}UPDATE_FILTERS`;

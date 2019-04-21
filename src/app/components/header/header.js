@@ -11,25 +11,27 @@ import { toast } from "react-toastify";
 import { SOMETHING_WRONG } from "../../constants/messages";
 
 class Header extends React.PureComponent {
-
   logout = () => {
-    logout().then(res => {
-      if(res.data.success) {
-        const { setAppData } = this.props;
-        setLocalStorage('isLoggedIn', false);
-        setLocalStorage('user', null);
-        setAppData({isLoggedIn:false})
-      } else toast.error(res.data.message);
-    })
-    .catch(err => {
-      toast.error(SOMETHING_WRONG);
-    })
-  }
+    logout()
+      .then(res => {
+        if (res.data.success) {
+          const { setAppData } = this.props;
+          setLocalStorage("isLoggedIn", false);
+          setLocalStorage("user", null);
+          setAppData({ isLoggedIn: false });
+        } else toast.error(res.data.message);
+      })
+      .catch(err => {
+        toast.error(SOMETHING_WRONG);
+      });
+  };
 
   renderLogo = () => {
     return (
       <div className="logo">
-        <img src={LOGO} alt="logo" />
+        <Link to="/">
+          <img src={LOGO} alt="logo" />
+        </Link>
       </div>
     );
   };
@@ -59,12 +61,12 @@ class Header extends React.PureComponent {
 
   toggleSideBar = () => {
     const { setAppData, sidebar } = this.props;
-    setAppData({sidebar:!sidebar});
-  }
+    setAppData({ sidebar: !sidebar });
+  };
 
   renderToggleBtn = () => {
     const { sidebar } = this.props;
-    if(sidebar) {
+    if (sidebar) {
       return (
         <div className="toggle" onClick={this.toggleSideBar}>
           <Icon name="list" />

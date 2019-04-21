@@ -1,21 +1,43 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./sidebar.scss";
 import { Row, ContainerFluid } from "../layout";
 
 class Sidebar extends React.PureComponent {
+  isActive = url => {
+    const { location } = this.props;
+    const path = location ? location.pathname : "";
+    if (url === undefined && path === "/") {
+      return "active";
+    }
+    if (path !== "/" && path.includes(url)) {
+      return "active";
+    }
+
+    return "";
+  };
+
   render() {
     const { sidebar } = this.props;
-    if(sidebar) {
+    if (sidebar) {
       return (
-        <div className='sidebar'>
+        <div className="sidebar">
           <ul>
-            <li><Link to='blogs'>Blogs</Link></li>
-            <li>Users</li>
-            <li>Settings</li>
-            <li>Logout</li>
-            <li>About</li>
-            <li>Terms</li>
+            <li>
+              <Link to="/" className={this.isActive()}>
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/blogs" className={this.isActive("blogs")}>
+                Blogs
+              </Link>
+            </li>
+            <li>
+              <Link to="/categories" className={this.isActive("categories")}>
+                Categories
+              </Link>
+            </li>
           </ul>
         </div>
       );
@@ -23,4 +45,4 @@ class Sidebar extends React.PureComponent {
   }
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);

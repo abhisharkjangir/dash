@@ -1,12 +1,18 @@
-import { connect } from 'react-redux';
-import Sidebar from './sidebar';
-import { setAppData } from '../../appActions';
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
 
-const mapStateToProps = (state) => ({...state.app});
+import Sidebar from "./sidebar";
+import { setAppData } from "../../appActions";
 
-const mapDispatchToProps = (dispatch) => ({
-  setAppData: (data) => dispatch(setAppData(data))
+const mapStateToProps = state => ({ ...state.app });
+
+const mapDispatchToProps = dispatch => ({
+  setAppData: data => dispatch(setAppData(data))
 });
 
-export default connect(mapStateToProps , mapDispatchToProps)(Sidebar);
-
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Sidebar)
+);

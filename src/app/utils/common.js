@@ -1,12 +1,59 @@
+import QueryString from "query-string";
+
 export const setLocalStorage = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
-}
+};
 
-export const getLocalStorage = (key) => {
+export const getLocalStorage = key => {
   let data = localStorage.getItem(key);
-  if(data) {
+  if (data) {
     return JSON.parse(data);
   }
   return undefined;
-}
+};
 
+export const findValueById = (arr, id) => {
+  let list = arr.filter(item => item.id == id)[0];
+  if (list) {
+    return list.name;
+  } else {
+    return "";
+  }
+};
+
+// Process Query Params for API Payload
+export const processQueryParams = (location, storeFilters) => {
+  let queryParams = QueryString.parse(location.search, {
+    ignoreQueryPrefix: true
+  });
+  if (
+    queryParams &&
+    queryParams.category &&
+    typeof queryParams.category == "string"
+  ) {
+    queryParams.category = [queryParams.category];
+  }
+  const payload = { ...storeFilters, ...queryParams };
+  payload.limit = queryParams.limit
+    ? parseInt(queryParams.limit)
+    : storeFilters.limit;
+  payload.offset = queryParams.offset
+    ? parseInt(queryParams.offset)
+    : storeFilters.offset;
+  return payload;
+};
+
+// Remove all the empty & null value keys from the object
+export const cleanObject = object => {
+  let cleanObject = {};
+  let keys = Object.keys(object);
+  if (keys) {
+    keys.forEach(key => {
+      let value = object[key];
+      if (value !== "" && value !== null) {
+        cleanObject[key] = value;
+      }
+    });
+  }
+  return cleanObject;
+};
