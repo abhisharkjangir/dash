@@ -10,7 +10,6 @@ import Input from "../../components/common/input";
 import Button from "../../components/common/button";
 import LinkButton from "../../components/common/linkButton";
 import Separator from "../../components/common/separator";
-import { blogs } from "./blogsService";
 import {
   setLocalStorage,
   findValueById,
@@ -86,10 +85,7 @@ class Blogs extends React.Component {
 
   fetchBlogs = () => {
     const {
-      data,
       fetchBlogs,
-      fetchBlogsSuccess,
-      fetchBlogsError,
       updateFilters,
       location,
       filters,
@@ -101,19 +97,7 @@ class Blogs extends React.Component {
       path: location.pathname,
       search: QueryString.stringify(cleanObject(payload))
     });
-    fetchBlogs();
-    blogs(cleanObject(payload))
-      .then(res => {
-        if (res.data.success) {
-          fetchBlogsSuccess(res.data.data);
-        } else {
-          fetchBlogsError(res.data.message);
-          toast.error(res.data.message);
-        }
-      })
-      .catch(err => {
-        fetchBlogsError(err);
-      });
+    fetchBlogs(cleanObject(payload));
   };
 
   renderBlogsTable = () => {
@@ -125,7 +109,7 @@ class Blogs extends React.Component {
           {list.map((l, i) => (
             <div key={i} className="table-skeleton">
               {list.map((l2, i2) => (
-                <div />
+                <div key={i2}/>
               ))}
             </div>
           ))}
@@ -182,12 +166,8 @@ class Blogs extends React.Component {
     const { filters } = this.props;
     const {
       title,
-      limit,
-      offset,
-      category,
       isFeatured,
       isTrending,
-      publishedBy
     } = filters;
     return (
       <div className="filter-view">

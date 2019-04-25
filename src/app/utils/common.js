@@ -1,9 +1,11 @@
 import QueryString from "query-string";
 
+// Set Values in local storage
 export const setLocalStorage = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
+// Get Values from local storage
 export const getLocalStorage = key => {
   let data = localStorage.getItem(key);
   if (data) {
@@ -12,8 +14,9 @@ export const getLocalStorage = key => {
   return undefined;
 };
 
+// Find a value in arr of objects by id
 export const findValueById = (arr, id) => {
-  let list = arr.filter(item => item.id == id)[0];
+  let list = arr.filter(item => item.id === id)[0];
   if (list) {
     return list.name;
   } else {
@@ -29,7 +32,7 @@ export const processQueryParams = (location, storeFilters) => {
   if (
     queryParams &&
     queryParams.category &&
-    typeof queryParams.category == "string"
+    typeof queryParams.category === "string"
   ) {
     queryParams.category = [queryParams.category];
   }

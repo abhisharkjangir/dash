@@ -1,40 +1,40 @@
 export const PUBLISH = [
   {
-    id: 1,
+    id: "1",
     name: "Published"
   },
   {
-    id: 0,
+    id: "0",
     name: "Unpublished"
   }
 ];
 export const PUBLISHED_BY = [
   {
-    id: 0,
+    id: "0",
     name: "Admin"
   },
   {
-    id: 1,
+    id: "1",
     name: "Other"
   }
 ];
 export const FEATURED = [
   {
-    id: 0,
+    id: "0",
     name: "No"
   },
   {
-    id: 1,
+    id: "1",
     name: "Yes"
   }
 ];
 export const TRENDING = [
   {
-    id: 0,
+    id: "0",
     name: "No"
   },
   {
-    id: 1,
+    id: "1",
     name: "Yes"
   }
 ];

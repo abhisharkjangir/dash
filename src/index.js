@@ -10,6 +10,7 @@ import * as serviceWorker from "./serviceWorker";
 import 'react-toastify/dist/ReactToastify.css';
 import "./app/styles/main.scss";
 import App from "./app";
+import rootSaga from "./rootSagas";
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -18,6 +19,7 @@ serviceWorker.register();
 
 // Create a store and get back itself and its history object
 const { store, history } = createStore();
+store.runSaga(rootSaga);
 
 // Running locally, we should run on a <ConnectedRouter /> rather than on a <StaticRouter /> like on the server
 // Let's also let React Frontload explicitly know we're not rendering on the server here
