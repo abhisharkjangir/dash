@@ -1,7 +1,5 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import {
-  FETCH_BLOGS,
-} from "./blogsConstants";
+import { call, put, takeLatest } from "redux-saga/effects";
+import { FETCH_BLOGS } from "./blogsConstants";
 
 import {
   fetchBlogsSuccess,
@@ -9,15 +7,15 @@ import {
   fetchingBlogs
 } from "./blogsActions";
 
-import ApiService from '../../utils/services';
+import ApiService from "../../utils/services";
 
 // Fetch All Blogs from API
 function* fetchBlogsData(payload) {
   try {
     yield put(fetchingBlogs());
     const { response } = yield call(ApiService, {
-      method:'POST',
-      url: 'blogs',
+      method: "POST",
+      url: "blogs",
       data: payload.data
     });
 
@@ -26,7 +24,7 @@ function* fetchBlogsData(payload) {
     } else {
       return yield put(fetchBlogsError(response.data.message));
     }
-  } catch(err) {
+  } catch (err) {
     return yield put(fetchBlogsError(err));
   }
 }

@@ -1,17 +1,18 @@
-import { connect } from 'react-redux';
-import Login from './login';
-import { setLoginData, setLoggingIn } from './loginActions';
-import { setAppData } from '../../appActions';
-const mapStateToProps = (state) => {
-  return {...state.login};
-}
+import { connect } from "react-redux";
+import Login from "./login";
+import { login } from "./loginActions";
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = state => {
+  return { ...state.login };
+};
+
+const mapDispatchToProps = dispatch => {
   return {
-    setLoggingIn: () => dispatch(setLoggingIn()),
-    setLoginData: (data) => dispatch(setLoginData(data)),
-    setAppData: (data) => dispatch(setAppData(data))
+    login: data => dispatch(login(data))
   };
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
