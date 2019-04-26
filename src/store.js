@@ -1,16 +1,9 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 import { createBrowserHistory, createMemoryHistory } from "history";
-import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleware from "redux-saga";
 import rootReducer from "./rootReducer";
-
-// A nice helper to tell us if we're on the server
-export const isServer = !(
-  typeof window !== "undefined" &&
-  window.document &&
-  window.document.createElement
-);
-
+import { isServer } from "./app/utils/common";
 export default (url = "/") => {
   // Create a history depending on the environment
   const history = isServer

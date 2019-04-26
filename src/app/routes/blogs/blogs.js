@@ -164,8 +164,6 @@ class Blogs extends React.Component {
 
   renderFilterView = () => {
     const { filters } = this.props;
-    console.log(this.props);
-
     const { title, isFeatured, isTrending } = filters;
     return (
       <div className="filter-view">

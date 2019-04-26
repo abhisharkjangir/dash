@@ -1,5 +1,12 @@
 import QueryString from "query-string";
 
+// A nice helper to tell us if we're on the server
+export const isServer = !(
+  typeof window !== "undefined" &&
+  window.document &&
+  window.document.createElement
+);
+
 // Set Values in local storage
 export const setLocalStorage = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));

@@ -13,7 +13,7 @@ import loader from "./loader";
 
 // Create our express app using the port optionally specified
 const app = express();
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 8080;
 
 // NOTE: UNCOMMENT THIS IF YOU WANT THIS FUNCTIONALITY
 /*
