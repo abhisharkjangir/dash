@@ -5,7 +5,7 @@ import {
   updateFilters
 } from "../blogs/blogsActions";
 
-const mapStateToProps = state => ({ ...state.blogs });
+const mapStateToProps = state => ({ ...state.blogs, ...state.app });
 
 const mapDispatchToProps = dispatch => ({
   fetchBlogs: (payload) => dispatch(fetchBlogs(payload)),

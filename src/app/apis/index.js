@@ -1,7 +1,8 @@
 const APIS = {
   login: "signin",
   logout: "signout",
-  blogs: "stories/filter"
+  blogs: "stories/filter",
+  categories: "categories"
 };
 
 const getApiEndPoint = name => {

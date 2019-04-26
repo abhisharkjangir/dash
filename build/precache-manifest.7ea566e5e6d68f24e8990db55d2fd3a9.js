@@ -1,27 +1,27 @@
 self.__precacheManifest = [
   {
-    "revision": "1674c26a140c45e0d505",
-    "url": "/static/js/main.3e7a27b2.chunk.js"
+    "revision": "cc193ccd3119060e8a86",
+    "url": "/static/js/main.d353085e.chunk.js"
   },
   {
-    "revision": "6bfd55da8751b5959ce3",
-    "url": "/static/js/0.12e5c3ae.chunk.js"
+    "revision": "8b8290aed3d826eea957",
+    "url": "/static/js/0.ac3f214c.chunk.js"
   },
   {
-    "revision": "7835feca16087483b03f",
-    "url": "/static/js/blogs.b469f8f0.chunk.js"
+    "revision": "4d14774c96f885931e54",
+    "url": "/static/js/blogs.5df31cc2.chunk.js"
   },
   {
-    "revision": "b33f2d6f0b472e4bfc52",
-    "url": "/static/js/10.22a2b282.chunk.js"
+    "revision": "5480e7b23b076de3ae10",
+    "url": "/static/js/10.c3ada916.chunk.js"
   },
   {
     "revision": "193277b43cc4d662a8fe",
     "url": "/static/js/forgetpassword.e2489d19.chunk.js"
   },
   {
-    "revision": "4c638fc097078e61923a",
-    "url": "/static/js/9.a906b763.chunk.js"
+    "revision": "07878efa00ed11c8bcee",
+    "url": "/static/js/9.3be65dd0.chunk.js"
   },
   {
     "revision": "e467687bc9f9e2a66682",
@@ -32,12 +32,12 @@ self.__precacheManifest = [
     "url": "/static/js/signup.fa57afe0.chunk.js"
   },
   {
-    "revision": "dd881aca99519b40c556",
-    "url": "/static/js/login.981eb31c.chunk.js"
+    "revision": "658d148019daacf82054",
+    "url": "/static/js/login.2f33a31c.chunk.js"
   },
   {
-    "revision": "cd129b41009e48663347",
-    "url": "/static/js/runtime~main.8724ccc7.js"
+    "revision": "e4f44793d8ef6967f085",
+    "url": "/static/js/runtime~main.3e26d1ab.js"
   },
   {
     "revision": "0665d5c1ee198efe0843",
@@ -52,11 +52,11 @@ self.__precacheManifest = [
     "url": "/static/css/notfound.2d919776.chunk.css"
   },
   {
-    "revision": "1674c26a140c45e0d505",
+    "revision": "cc193ccd3119060e8a86",
     "url": "/static/css/main.8b22ebd0.chunk.css"
   },
   {
-    "revision": "dd881aca99519b40c556",
+    "revision": "658d148019daacf82054",
     "url": "/static/css/login.189fa947.chunk.css"
   },
   {
@@ -68,15 +68,15 @@ self.__precacheManifest = [
     "url": "/static/css/forgetpassword.51a88546.chunk.css"
   },
   {
-    "revision": "7835feca16087483b03f",
+    "revision": "4d14774c96f885931e54",
     "url": "/static/css/blogs.8b7a736e.chunk.css"
   },
   {
-    "revision": "4c638fc097078e61923a",
+    "revision": "07878efa00ed11c8bcee",
     "url": "/static/css/9.f733ec1a.chunk.css"
   },
   {
-    "revision": "db5cfba42eff89e90647139af84fcc11",
+    "revision": "1e59a47dc5dd88b9ffc02b19ad5edd53",
     "url": "/index.html"
   }
 ];

@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { LOGIN } from "./loginConstants";
 import { loginError, loggingIn, loginSuccess } from "./loginActions";
 import ApiService from "../../utils/services";
-import { setAppData } from "../../appActions";
+import { setAppData, fetchCategories } from "../../appActions";
 import { setLocalStorage } from "../../utils/common";
 
 function* login(payload) {
@@ -17,10 +17,12 @@ function* login(payload) {
 
     if (response.data.success) {
       const data = response.data.data;
+
       setLocalStorage("isLoggedIn", true);
       setLocalStorage("user", data);
       yield put(setAppData({ ...data, isLoggedIn: true }));
-      return yield put(loginSuccess(data));
+      yield put(loginSuccess(data));
+      return yield put(fetchCategories());
     } else {
       return yield put(loginError(response.data.message));
     }

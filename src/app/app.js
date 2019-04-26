@@ -9,9 +9,10 @@ import ScrollToTop from "./components/scrolltotop";
 class App extends Component {
 
   componentWillMount() {
-    const { storage, setAppData } = this.props;
+    const { storage, setAppData, fetchCategories} = this.props;
     if(storage.isLoggedIn && storage.user) {
       setAppData({isLoggedIn: true, ...storage.user});
+      fetchCategories();
     } else {
       setAppData({isLoggedIn: false});
     }

@@ -109,7 +109,7 @@ class Blogs extends React.Component {
           {list.map((l, i) => (
             <div key={i} className="table-skeleton">
               {list.map((l2, i2) => (
-                <div key={i2}/>
+                <div key={i2} />
               ))}
             </div>
           ))}
@@ -164,11 +164,9 @@ class Blogs extends React.Component {
 
   renderFilterView = () => {
     const { filters } = this.props;
-    const {
-      title,
-      isFeatured,
-      isTrending,
-    } = filters;
+    console.log(this.props);
+
+    const { title, isFeatured, isTrending } = filters;
     return (
       <div className="filter-view">
         <Form autoComplete="off" onSubmit={this.onChangeHandler}>
@@ -197,6 +195,16 @@ class Blogs extends React.Component {
                 <Select
                   id="isFeatured"
                   name="isFeatured"
+                  value={isFeatured}
+                  onChange={this.onChangeHandler}
+                  label="FEATURED"
+                  options={this.FEATURED_OPTIONS}
+                />
+              </Col>
+              <Col xs={12} lg={2}>
+                <Select
+                  id="categories"
+                  name="categories"
                   value={isFeatured}
                   onChange={this.onChangeHandler}
                   label="FEATURED"
