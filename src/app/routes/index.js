@@ -36,12 +36,12 @@ const Blogs = Loadable({
 });
 
 const Categories = Loadable({
-  loader: () => import(/* webpackChunkName: "blogs" */ "./categories"),
+  loader: () => import(/* webpackChunkName: "categories" */ "./categories"),
   loading: () => null
 });
 
 const AddBlog = Loadable({
-  loader: () => import(/* webpackChunkName: "blogs" */ "./addblog"),
+  loader: () => import(/* webpackChunkName: "addblog" */ "./addblog"),
   loading: () => null
 });
 
