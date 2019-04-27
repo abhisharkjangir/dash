@@ -20,7 +20,7 @@
   .box {
     text-align: center;
     padding: 30px 15px;
-    background-color: var(--color-white);
+    // background-color: var(--color-white);
     margin-bottom: 30px;
   }
 
@@ -32,4 +32,9 @@
   p {
     font-size: var(--font-size-12);
   }
+}
+
+.logged-in {
+  width: calc(100vw - 250px - 30px);
+  min-height: calc(100vh - 55px - 55px - 30px);
 }

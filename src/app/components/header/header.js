@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./header.scss";
-import { HEADER_LINKS } from "../../constants";
-import { Row, ContainerFluid } from "../layout";
 import { LOGO } from "../../assets/imgs";
 import Icon from "../common/Icon";
 import { setLocalStorage } from "../../utils/common";
@@ -40,17 +38,6 @@ class Header extends React.PureComponent {
     return (
       <div className="menu">
         <ul>
-          <li>
-            <Icon name="bell" />
-            Notifications
-          </li>
-          <li>
-            <Icon name="settings" />
-            Settings
-          </li>
-          <li>
-            <Icon name="menu" /> Menu
-          </li>
           <li onClick={this.logout}>
             <Icon name="logout" /> Logout
           </li>

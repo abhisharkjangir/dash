@@ -60,7 +60,7 @@ export const cleanObject = object => {
   if (keys) {
     keys.forEach(key => {
       let value = object[key];
-      if (value !== "" && value !== null) {
+      if (value !== "" && value !== null && value.length !== 0) {
         cleanObject[key] = value;
       }
     });

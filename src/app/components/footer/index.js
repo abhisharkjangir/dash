@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import "./footer.scss";
-import { ContainerFluid } from "../layout";
-import { LOGO } from "../../assets/imgs";
-
 
 class Footer extends Component {
   render() {

@@ -16,9 +16,19 @@ import LoginReducer from "./app/routes/login/loginReducer";
 import { BLOGS_STATE_KEY } from "./app/routes/blogs/blogsConstants";
 import BlogsReducer from "./app/routes/blogs/blogsReducer";
 
+// Categories Reducer
+import { CATEGORIES_STATE_KEY } from "./app/routes/categories/categoriesConstants";
+import CategoriesReducer from "./app/routes/categories/categoriesReduer";
+
+// Add Blog Reducer
+import { ADD_BLOG_STATE_KEY } from "./app/routes/addblog/addBlogConstants";
+import AddBlogReducer from "./app/routes/addblog/addBlogReducer";
+
 export default combineReducers({
   [APP_STATE_KEY]: AppReducer,
   [HOME_STATE_KEY]: HomeReducer,
   [LOGIN_STATE_KEY]: LoginReducer,
   [BLOGS_STATE_KEY]: BlogsReducer,
+  [CATEGORIES_STATE_KEY]: CategoriesReducer,
+  [ADD_BLOG_STATE_KEY]:AddBlogReducer,
 });

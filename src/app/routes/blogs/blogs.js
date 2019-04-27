@@ -1,27 +1,24 @@
 import React from "react";
-import { toast } from "react-toastify";
 import QueryString from "query-string";
+
 import _ from "lodash";
+import { pathOr } from "lodash/fp";
 import Page from "../../components/page";
 import "./blogs.scss";
 import Meta from "../../constants/meta";
 import Form from "../../components/common/form";
 import Input from "../../components/common/input";
-import Button from "../../components/common/button";
 import LinkButton from "../../components/common/linkButton";
-import Separator from "../../components/common/separator";
 import {
-  setLocalStorage,
   findValueById,
   cleanObject,
   processQueryParams
 } from "../../utils/common";
 import PageHeading from "../../components/common/pageHeading";
 import { TRENDING, FEATURED, PUBLISHED_BY } from "../../constants";
-import Icon from "../../components/common/Icon";
 import { Row, Col, ContainerFluid } from "../../components/layout";
-import Checkbox from "../../components/common/checkbox";
 import Select from "../../components/common/select";
+import MultiSelectTag from "../../components/common/multiSelectTag";
 
 class Blogs extends React.Component {
   constructor(props) {
@@ -34,7 +31,7 @@ class Blogs extends React.Component {
           <LinkButton
             className="d-block"
             label={blog.title}
-            to={`/story/${blog._id}`}
+            to={`/blog/${blog._id}`}
           />
         )
       },
@@ -64,12 +61,15 @@ class Blogs extends React.Component {
         getValue: blog => findValueById(PUBLISHED_BY, blog.publishedBy)
       },
       {
-        name: "",
+        name: "Action",
         key: "publishedBy",
         getValue: blog => (
-          <div>
-            <Icon name="close" className="d-inline-block fs-14" />
-          </div>
+          <>
+            <LinkButton to={`/blog/${blog._id}`} label='Edit' className='edit' />
+            <span className="delete" onClick={() => this.deleteBlog(blog)}>
+              Delete
+            </span>
+          </>
         )
       }
     ];
@@ -82,6 +82,13 @@ class Blogs extends React.Component {
   componentWillMount() {
     this.fetchBlogs();
   }
+
+  deleteBlog = blog => {
+    const blogId = pathOr(null, "_id", blog);
+    if (blogId) {
+      this.props.deleteBlog(blogId);
+    }
+  };
 
   fetchBlogs = () => {
     const {
@@ -103,21 +110,23 @@ class Blogs extends React.Component {
   renderBlogsTable = () => {
     const { data, isFetching } = this.props;
     if (isFetching) {
-      const list = ["", "", "", "", "", ""];
+      const list = [
+        ["", "", "", "", "", ""],
+        ["", "", "", "", "", ""],
+        ["", "", "", "", "", ""],
+        ["", "", "", "", "", ""]
+      ];
       return (
         <>
           {list.map((l, i) => (
             <div key={i} className="table-skeleton">
-              {list.map((l2, i2) => (
+              {l.map((l2, i2) => (
                 <div key={i2} />
               ))}
             </div>
           ))}
         </>
       );
-    }
-    if (!isFetching && data.length === 0) {
-      return <div>No Data Found</div>;
     }
     if (!isFetching && data.length > 0) {
       return (
@@ -148,8 +157,14 @@ class Blogs extends React.Component {
   onChangeHandler = e => {
     e.preventDefault();
     const { updateFilters, history, filters, location } = this.props;
-    let name = e.target.name;
-    let value = e.target.value;
+    let name, value;
+    if (e.type === "multiSelectOption") {
+      name = e.detail.name;
+      value = e.detail.value;
+    } else {
+      name = e.target.name;
+      value = e.target.value;
+    }
     const filter = {
       [name]: value
     };
@@ -162,15 +177,37 @@ class Blogs extends React.Component {
     this.filterDebounce();
   };
 
+  renderFilterMessage = () => {
+    const { data, isFetching } = this.props;
+    let message;
+    if (isFetching) {
+      message = "Loading... Please wait.";
+    } else {
+      if (data && data.length) {
+        message = `Showing ${data.length} result(s)`;
+      } else {
+        message = `Sorry, no data found.`;
+      }
+    }
+
+    return (
+      <Row>
+        <Col>
+          <div className="message">{message}</div>
+        </Col>
+      </Row>
+    );
+  };
+
   renderFilterView = () => {
-    const { filters } = this.props;
-    const { title, isFeatured, isTrending } = filters;
+    const { filters, categories } = this.props;
+    const { title, isFeatured, isTrending, category } = filters;
     return (
       <div className="filter-view">
         <Form autoComplete="off" onSubmit={this.onChangeHandler}>
           <ContainerFluid>
             <Row>
-              <Col xs={12} lg={6}>
+              <Col xs={12} sm={6} lg={6}>
                 <Input
                   id="title"
                   name="title"
@@ -179,7 +216,7 @@ class Blogs extends React.Component {
                   label="SEARCH BLOGS BY NAME/CATEGORY"
                 />
               </Col>
-              <Col xs={12} lg={2}>
+              <Col xs={12} sm={3} lg={3}>
                 <Select
                   id="isTrending"
                   name="isTrending"
@@ -189,7 +226,7 @@ class Blogs extends React.Component {
                   options={this.TRENDING_OPTIONS}
                 />
               </Col>
-              <Col xs={12} lg={2}>
+              <Col xs={12} sm={3} lg={3}>
                 <Select
                   id="isFeatured"
                   name="isFeatured"
@@ -199,28 +236,42 @@ class Blogs extends React.Component {
                   options={this.FEATURED_OPTIONS}
                 />
               </Col>
-              <Col xs={12} lg={2}>
-                <Select
-                  id="categories"
-                  name="categories"
-                  value={isFeatured}
+            </Row>
+            <Row>
+              <Col xs={12} lg={12}>
+                <MultiSelectTag
+                  id="category"
+                  uniqueKey="_id"
+                  name="category"
+                  value={category}
                   onChange={this.onChangeHandler}
-                  label="FEATURED"
-                  options={this.FEATURED_OPTIONS}
+                  label="CATEGORY"
+                  options={categories.data}
                 />
               </Col>
             </Row>
+            {this.renderFilterMessage()}
           </ContainerFluid>
         </Form>
       </div>
     );
   };
 
+  renderPageHeader = () => {
+    return (
+      <div className='page-header'>
+        <h1>Blogs</h1>
+        <LinkButton to='/blog/add' label='Add New Blog'/>
+      </div>
+    )
+  }
+
   render() {
     return (
       <Page {...Meta.blogs}>
         <div className="blogs-page">
           <PageHeading text="Dashboard &#8226; Blogs" />
+          {this.renderPageHeader()}
           {this.renderFilterView()}
           {this.renderBlogsTable()}
         </div>

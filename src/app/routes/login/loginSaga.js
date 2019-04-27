@@ -4,6 +4,8 @@ import { loginError, loggingIn, loginSuccess } from "./loginActions";
 import ApiService from "../../utils/services";
 import { setAppData, fetchCategories } from "../../appActions";
 import { setLocalStorage } from "../../utils/common";
+import { toast } from "react-toastify";
+import { SOMETHING_WRONG } from "../../constants/messages";
 
 function* login(payload) {
   try {
@@ -24,9 +26,11 @@ function* login(payload) {
       yield put(loginSuccess(data));
       return yield put(fetchCategories());
     } else {
+      toast.error(response.data.message);
       return yield put(loginError(response.data.message));
     }
   } catch (error) {
+    toast.error(SOMETHING_WRONG);
     return yield put(loginError(error));
   }
 }

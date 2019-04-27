@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./sidebar.scss";
-import { Row, ContainerFluid } from "../layout";
 
 class Sidebar extends React.PureComponent {
   isActive = url => {
@@ -29,7 +28,7 @@ class Sidebar extends React.PureComponent {
               </Link>
             </li>
             <li>
-              <Link to="/blogs" className={this.isActive("blogs")}>
+              <Link to="/blogs" className={this.isActive("blog")}>
                 Blogs
               </Link>
             </li>

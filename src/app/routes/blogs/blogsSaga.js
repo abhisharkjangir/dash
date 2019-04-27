@@ -1,10 +1,13 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { FETCH_BLOGS } from "./blogsConstants";
+import { call, put, takeLatest, takeEvery } from "redux-saga/effects";
+import { FETCH_BLOGS, DELETE_BLOG } from "./blogsConstants";
 
 import {
   fetchBlogsSuccess,
   fetchBlogsError,
-  fetchingBlogs
+  fetchingBlogs,
+  deletingBlog,
+  deleteBlogSuccess,
+  deleteBlogError
 } from "./blogsActions";
 
 import ApiService from "../../utils/services";
@@ -29,8 +32,29 @@ function* fetchBlogsData(payload) {
   }
 }
 
+// DELETE Blog by blogId
+function* deleteBlogById(payload) {
+  try {
+    yield put(deletingBlog());
+    const { response } = yield call(ApiService, {
+      method: "DELETE",
+      url: "deleteBlog",
+      appendUrl: `/${payload.data}`
+    });
+
+    if (response.data.success) {
+      return yield put(deleteBlogSuccess(payload.data));
+    } else {
+      return yield put(deleteBlogError(response.data.message));
+    }
+  } catch (err) {
+    return yield put(deleteBlogError(err));
+  }
+}
+
 export function* blogsSaga() {
   yield takeLatest(FETCH_BLOGS, fetchBlogsData);
+  yield takeEvery(DELETE_BLOG, deleteBlogById);
 }
 
 export default blogsSaga;
