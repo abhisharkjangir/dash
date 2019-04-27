@@ -1,5 +1,21 @@
 @import '../../styles/theme';
 
 .add-blog-page {
+  .page-header {
+    background-color: var(--color-white);
+    padding: 15px;
+    margin-bottom: 15px;
+    h1 {
+      display: inline-block;
+      font-size: var(--font-size-14);
+      margin: 0;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+  }
 
+  .blog-form {
+    padding: 15px;
+    background-color: var(--color-white);
+  }
 }

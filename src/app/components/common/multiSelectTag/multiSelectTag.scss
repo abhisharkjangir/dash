@@ -6,7 +6,8 @@
     margin-bottom: 10px;
     display: flex;
     flex-wrap: wrap;
-
+    min-height: 38px;
+    padding-top: 4px;
     .tag {
       font-size: var(--font-size-12);
       background-color: var(--color-grey);
