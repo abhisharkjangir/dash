@@ -10,40 +10,26 @@ import Select from "../../components/common/select";
 import QuillEditor from "../../components/common/quillEditor";
 import FileBrowser from "../../components/common/fileBrowser";
 import Form from "../../components/common/form";
+import Button from "../../components/common/button";
+import { PUBLISH, PUBLISHED_BY, FEATURED, TRENDING } from "../../constants";
+import { toast } from "react-toastify";
 
 class AddBlog extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      formData: {
-        title: "",
-        author: "",
-        isPublished: 1,
-        isTrending: 0,
-        isFeatured: 0,
-        image: "",
-        imageSrc: "",
-        keywords: "",
-        story: "",
-        viewsCount: 0,
-        category: [],
-        sharedCount: 0,
-        // "tags": [],
-        createdDate: new Date(),
-        updatedDate: new Date(),
-        publishedDate: new Date(),
-        publishedBy: 0
-      }
-    };
-  }
-
-  onChangeHandler = (e) => {
-    let value = e.target.value;
-    let name = e.target.name;
-    let { formData } = this.state;
-    formData[name] = value;
-    this.setState({formData});
-  }
+  onChangeHandler = e => {
+    let name, value;
+    const { updateFormData } = this.props;
+    if (e.type === "multiSelectOption" || e.type === "QuillEditorChange") {
+      name = e.detail.name;
+      value = e.detail.value;
+    } else if (e.target.files) {
+      value = e.target.files[0];
+      name = e.target.name;
+    } else {
+      value = e.target.value;
+      name = e.target.name;
+    }
+    updateFormData({ [name]: value });
+  };
 
   renderPageHeader = () => {
     return (
@@ -54,26 +40,25 @@ class AddBlog extends React.PureComponent {
   };
 
   renderBlogForm = () => {
-    const { categories } = this.props;
-    const { formData } = this.state;
+    const { categories, isAdding, formData } = this.props;
     const {
       title,
       author,
+      keywords,
+      image,
+      category,
       isPublished,
       isFeatured,
-      keywords,
       story,
-      category,
       publishedBy,
-      image,
-      imageSrc
+      isTrending
     } = formData;
 
     return (
       <div className="blog-form">
-        <Form>
+        <Form onSubmit={this.addBlog}>
           <Row>
-            <Col xs={12} lg={3}>
+            <Col xs={12} sm={3} lg={3}>
               <Input
                 id="title"
                 value={title}
@@ -82,7 +67,7 @@ class AddBlog extends React.PureComponent {
                 label="Title"
               />
             </Col>
-            <Col xs={12} lg={3}>
+            <Col xs={12} sm={3} lg={3}>
               <Input
                 id="author"
                 value={author}
@@ -92,7 +77,7 @@ class AddBlog extends React.PureComponent {
               />
             </Col>
 
-            <Col xs={12} lg={6}>
+            <Col xs={12} sm={6} lg={6}>
               <Input
                 id="keywords"
                 value={keywords}
@@ -101,65 +86,113 @@ class AddBlog extends React.PureComponent {
                 label="keywords"
               />
             </Col>
-            <Col xs={12} lg={6}>
-              <FileBrowser label="Image" />
+            <Col xs={12} sm={6} lg={6}>
+              <FileBrowser
+                id="image"
+                label="Image"
+                selectedImage={image}
+                name="image"
+                accept="image/*"
+                onChange={this.onChangeHandler}
+              />
             </Col>
-
-            <Col xs={12} lg={6}>
+            <Col xs={12} sm={6} lg={6}>
               <MultiSelectTag
                 label="CATEGORY"
                 uniqueKey="_id"
-                value={[]}
+                value={category}
+                name="category"
+                onChange={this.onChangeHandler}
                 options={categories.data}
               />
             </Col>
             <Col xs={12} lg={12}>
               <QuillEditor
-                value=""
+                value={story}
+                name="story"
                 label="Content"
                 onChange={this.onChangeHandler}
               />
             </Col>
             <Col xs={12} lg={3}>
               <Select
-                id="isFeatured"
-                name="isFeatured"
+                id="isPublished"
+                name="isPublished"
+                value={isPublished}
                 onChange={this.onChangeHandler}
                 label="Publish Status"
-                options={this.FEATURED_OPTIONS}
+                options={PUBLISH}
               />
             </Col>
             <Col xs={12} lg={3}>
               <Select
-                id="isFeatured"
-                name="isFeatured"
+                id="publishedBy"
+                name="publishedBy"
+                value={publishedBy}
                 onChange={this.onChangeHandler}
                 label="Publish By"
-                options={this.FEATURED_OPTIONS}
+                options={PUBLISHED_BY}
               />
             </Col>
             <Col xs={12} lg={3}>
               <Select
                 id="isFeatured"
                 name="isFeatured"
-                onChange={this.onChangeHandler}
-                label="Trending"
-                options={this.FEATURED_OPTIONS}
-              />
-            </Col>
-            <Col xs={12} lg={3}>
-              <Select
-                id="isFeatured"
-                name="isFeatured"
+                value={isFeatured}
                 onChange={this.onChangeHandler}
                 label="Featured"
-                options={this.FEATURED_OPTIONS}
+                options={FEATURED}
               />
             </Col>
+            <Col xs={12} lg={3}>
+              <Select
+                id="isTrending"
+                value={isTrending}
+                name="isTrending"
+                onChange={this.onChangeHandler}
+                label="Trending"
+                options={TRENDING}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col lg={4} />
+            <Col lg={4}>
+              <Button
+                label="Add Blog"
+                onClick={this.addBlog}
+                disabled={isAdding}
+              />
+            </Col>
+            <Col lg={4} />
           </Row>
         </Form>
       </div>
     );
+  };
+
+  addBlog = e => {
+    e.preventDefault();
+    const { addBlog, formData } = this.props;
+    const blog = formData;
+    let isFormInvalid = false;
+    Object.keys(blog).forEach(key => {
+      if (
+        (blog[key] === "" || (blog[key] && blog[key].length === 0)) &&
+        key !== "imageSrc"
+      ) {
+        if (!isFormInvalid) {
+          toast.error(`${key.toLocaleUpperCase()} is invalid!`);
+        }
+        isFormInvalid = true;
+      }
+    });
+    if (isFormInvalid) return;
+    let blogFormData = new FormData();
+    Object.keys(blog).forEach(key => {
+      blogFormData.append(key, blog[key]);
+    });
+    addBlog(blogFormData);
   };
 
   render() {

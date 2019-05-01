@@ -8,9 +8,9 @@ class MultiSelectTag extends React.Component {
     if (value && name) {
       let options = [...value];
       if (options.indexOf(option[uniqueKey].toString()) > -1) {
-        options = options.filter(i => i !== option[uniqueKey].toString());
+        options = options.filter(i => (i).toString() !== option[uniqueKey].toString());
       } else {
-        options = [...options, option[uniqueKey]];
+        options = [...options, option[uniqueKey].toString()];
       }
       const event = new CustomEvent("multiSelectOption", {
         detail: {

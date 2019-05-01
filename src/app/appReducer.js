@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   isLoggedIn: false,
-  sidebar: true,
+  sidebar: false,
   categories: {
     data: [],
     isFetching: false,

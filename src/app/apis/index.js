@@ -3,6 +3,7 @@ const APIS = {
   logout: "signout",
   blogs: "stories/filter",
   deleteBlog: "story/delete",
+  addBlog: "story/add",
   categories: "categories",
   blogDetails: "story"
 };

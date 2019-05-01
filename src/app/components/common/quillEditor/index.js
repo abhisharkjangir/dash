@@ -34,44 +34,47 @@ const DefaultQuillFormats = [
 ];
 
 class QuillEditor extends React.PureComponent {
-
   constructor(props) {
-    super(props)
+    super(props);
     if (!isServer) {
-      this.ReactQuill = require('react-quill')
+      this.ReactQuill = require("react-quill");
     }
   }
+
+  changeHandler = value => {
+    const { name, onChange } = this.props;
+    const event = new CustomEvent("QuillEditorChange", {
+      detail: {
+        name,
+        value
+      },
+      bubbles: true,
+      cancelable: true
+    });
+    onChange(event);
+  };
+
   render() {
     const {
       id,
-      type,
-      name,
       value,
-      onChange,
       label,
-      disabled,
-      className,
-      modules,
-      formats
     } = this.props;
     const ReactQuill = this.ReactQuill;
-    if(!isServer && ReactQuill) {
+    if (!isServer && ReactQuill) {
       return (
         <Wrapper className="mb-3">
           <label htmlFor={id}>{label}</label>
 
-            <ReactQuill
-              value={value}
-              onChange={onChange}
-              modules={DefaultQuillModule}
-              formats={DefaultQuillFormats}
-            />
-
+          <ReactQuill
+            value={value}
+            onChange={this.changeHandler}
+            modules={DefaultQuillModule}
+            formats={DefaultQuillFormats}
+          />
         </Wrapper>
       );
     } else return null;
-
-
   }
 }
 
