@@ -36,6 +36,7 @@ const DefaultQuillFormats = [
 class QuillEditor extends React.PureComponent {
   constructor(props) {
     super(props);
+    // As window Object is not available on server side
     if (!isServer) {
       this.ReactQuill = require("react-quill");
     }
@@ -55,12 +56,9 @@ class QuillEditor extends React.PureComponent {
   };
 
   render() {
-    const {
-      id,
-      value,
-      label,
-    } = this.props;
+    const { id, value, label } = this.props;
     const ReactQuill = this.ReactQuill;
+    // As window Object is not available on server side
     if (!isServer && ReactQuill) {
       return (
         <Wrapper className="mb-3">

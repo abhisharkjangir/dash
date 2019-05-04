@@ -19,10 +19,16 @@ import { TRENDING, FEATURED, PUBLISHED_BY } from "../../constants";
 import { Row, Col, ContainerFluid } from "../../components/layout";
 import Select from "../../components/common/select";
 import MultiSelectTag from "../../components/common/multiSelectTag";
+import ConfirmationModal from "../../components/common/confirmationModal";
 
 class Blogs extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      confirmationModal: {
+        isOpen: false
+      }
+    };
     this.TABLE_COLUMNS = [
       {
         name: "Title",
@@ -65,7 +71,11 @@ class Blogs extends React.Component {
         key: "publishedBy",
         getValue: blog => (
           <>
-            <LinkButton to={`/blog/${blog._id}`} label='Edit' className='edit' />
+            <LinkButton
+              to={`/blog/${blog._id}`}
+              label="Edit"
+              className="edit"
+            />
             <span className="delete" onClick={() => this.deleteBlog(blog)}>
               Delete
             </span>
@@ -79,14 +89,35 @@ class Blogs extends React.Component {
     this.filterDebounce = _.debounce(this.fetchBlogs, 600);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.fetchBlogs();
   }
+
+  getDeleteConfirmation = (response, item) => {
+    this.setState({
+      confirmationModal: {
+        isOpen: false,
+        title: undefined,
+        message: undefined
+      }
+    });
+    if (response) {
+      const blogId = pathOr(null, "_id", item);
+      this.props.deleteBlog(blogId);
+    }
+  };
 
   deleteBlog = blog => {
     const blogId = pathOr(null, "_id", blog);
     if (blogId) {
-      this.props.deleteBlog(blogId);
+      this.setState({
+        confirmationModal: {
+          isOpen: true,
+          title: "Delete Blog",
+          message: `Are you sure you want to delete "${blog.title}" blog?`,
+          item: blog
+        }
+      });
     }
   };
 
@@ -109,6 +140,7 @@ class Blogs extends React.Component {
 
   renderBlogsTable = () => {
     const { data, isFetching } = this.props;
+    // Show Sekeleton If fetching state
     if (isFetching) {
       const list = [
         ["", "", "", "", "", ""],
@@ -158,6 +190,7 @@ class Blogs extends React.Component {
     e.preventDefault();
     const { updateFilters, history, filters, location } = this.props;
     let name, value;
+    // To handle MultiSelectTag Change
     if (e.type === "multiSelectOption") {
       name = e.detail.name;
       value = e.detail.value;
@@ -259,14 +292,15 @@ class Blogs extends React.Component {
 
   renderPageHeader = () => {
     return (
-      <div className='page-header'>
+      <div className="page-header">
         <h1>Blogs</h1>
-        <LinkButton to='/blog/add' label='Add New Blog'/>
+        <LinkButton to="/blog/add" label="Add New Blog" />
       </div>
-    )
-  }
+    );
+  };
 
   render() {
+    const { confirmationModal } = this.state;
     return (
       <Page {...Meta.blogs}>
         <div className="blogs-page">
@@ -274,6 +308,10 @@ class Blogs extends React.Component {
           {this.renderPageHeader()}
           {this.renderFilterView()}
           {this.renderBlogsTable()}
+          <ConfirmationModal
+            {...confirmationModal}
+            onClose={this.getDeleteConfirmation}
+          />
         </div>
       </Page>
     );
