@@ -2,12 +2,17 @@ import {
   SET_DATA,
   FETCHING_CATEGORIES,
   FETCH_CATEGORIES_SUCCESS,
-  FETCH_CATEGORIES_ERROR
+  FETCH_CATEGORIES_ERROR,
+  SHOW_LOADER,
+  HIDE_LOADER
 } from "./appConstants";
 
 const initialState = {
   isLoggedIn: false,
   sidebar: false,
+  loader: {
+    value: false
+  },
   categories: {
     data: [],
     isFetching: false,
@@ -42,6 +47,24 @@ const reducer = (state = initialState, action) => {
           isFetching: false,
           data: [],
           error: action.data
+        }
+      };
+
+    case SHOW_LOADER:
+      return {
+        ...state,
+        loader: {
+          value: true,
+          message: action.data
+        }
+      };
+
+    case HIDE_LOADER:
+      return {
+        ...state,
+        loader: {
+          value: false,
+          message: undefined
         }
       };
 

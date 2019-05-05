@@ -3,7 +3,9 @@ import {
   FETCH_CATEGORIES,
   FETCHING_CATEGORIES,
   FETCH_CATEGORIES_SUCCESS,
-  FETCH_CATEGORIES_ERROR
+  FETCH_CATEGORIES_ERROR,
+  SHOW_LOADER,
+  HIDE_LOADER
 } from "./appConstants";
 
 // APP DATA
@@ -19,4 +21,11 @@ export const fetchCategoriesSuccess = data => ({
 export const fetchCategoriesError = data => ({
   type: FETCH_CATEGORIES_ERROR,
   data
+});
+export const showLoader = data => ({
+  type: SHOW_LOADER,
+  data
+});
+export const hideLoader = () => ({
+  type: HIDE_LOADER
 });
