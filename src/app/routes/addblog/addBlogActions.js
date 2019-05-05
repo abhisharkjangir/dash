@@ -7,7 +7,7 @@ import {
 } from "./addBlogConstants";
 
 export const updateFormData = data => ({ type: UPDATE_FORM_DATA, data });
-export const addBlog = data => ({ type: ADD_BLOG, data });
+export const addBlog = (data, history) => ({ type: ADD_BLOG, data, history });
 export const addingBlog = () => ({ type: ADDING_BLOG });
 export const addBlogSuccess = data => ({ type: ADD_BLOG_SUCCESS, data });
 export const addBlogError = data => ({ type: ADD_BLOG_ERROR, data });

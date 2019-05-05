@@ -173,7 +173,7 @@ class AddBlog extends React.PureComponent {
 
   addBlog = e => {
     e.preventDefault();
-    const { addBlog, formData } = this.props;
+    const { addBlog, formData, history } = this.props;
     const blog = formData;
     let isFormInvalid = false;
     Object.keys(blog).forEach(key => {
@@ -192,7 +192,7 @@ class AddBlog extends React.PureComponent {
     Object.keys(blog).forEach(key => {
       blogFormData.append(key, blog[key]);
     });
-    addBlog(blogFormData);
+    addBlog(blogFormData, history);
   };
 
   render() {
