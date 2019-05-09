@@ -6,6 +6,7 @@ import Sidebar from "./components/sidebar";
 import Routes from "./routes";
 import ScrollToTop from "./components/scrolltotop";
 import Loader from "./components/common/loader";
+import ErrorBoundary from "./components/errorBoundary";
 
 class App extends Component {
   componentWillMount() {
@@ -22,34 +23,38 @@ class App extends Component {
     const { isLoggedIn, sidebar, loader } = this.props;
     if (isLoggedIn) {
       return (
-        <ScrollToTop>
-          <div id="app">
-            <ToastContainer />
-            <Header />
-            <div id="content" className="content">
-              <Sidebar />
-              <div className={sidebar ? "main" : "main-no-sidebar"}>
-                <Routes />
+        <ErrorBoundary>
+          <ScrollToTop>
+            <div id="app">
+              <ToastContainer />
+              <Header />
+              <div id="content" className="content">
+                <Sidebar />
+                <div className={sidebar ? "main" : "main-no-sidebar"}>
+                  <Routes />
+                </div>
+                <Loader loader={loader} />
+                <Footer sidebar={sidebar} />
               </div>
-              <Loader loader={loader} />
-              <Footer sidebar={sidebar} />
             </div>
-          </div>
-        </ScrollToTop>
+          </ScrollToTop>
+        </ErrorBoundary>
       );
     } else {
       return (
-        <ScrollToTop>
-          <div id="app">
-            <ToastContainer />
-            <div id="content" className="content">
-              <div className="main-guest-user">
-                <Routes />
+        <ErrorBoundary>
+          <ScrollToTop>
+            <div id="app">
+              <ToastContainer />
+              <div id="content" className="content">
+                <div className="main-guest-user">
+                  <Routes />
+                </div>
               </div>
             </div>
-          </div>
-          <Loader loader={loader} />
-        </ScrollToTop>
+            <Loader loader={loader} />
+          </ScrollToTop>
+        </ErrorBoundary>
       );
     }
   }
