@@ -1,7 +1,9 @@
 import axios from 'axios';
 import qs from 'query-string';
 import ENV from '../constants/config';
-import { getLocalStorage } from './common';
+import { getLocalStorage, setLocalStorage } from './common';
+import { AUTH_FAILED } from '../constants/messages';
+import { toast } from 'react-toastify';
 
 // FETCH TOKEN from localStorage for every request
 const getAuthToken = () => {
@@ -37,6 +39,12 @@ const Axios = (baseURL) => {
   axiosInstance.interceptors.response.use((response) => {
     if (response.data.success) { // RESPONSE_CODE CAN BE CAHNGE
 
+    }
+    // Handle Authentication Failed
+    if(!response.data.success && response.data.message === AUTH_FAILED) {
+      toast.error(AUTH_FAILED);
+      setLocalStorage("isLoggedIn", false);
+      setLocalStorage("user", null);
     }
     return response;
   }, (error) => {

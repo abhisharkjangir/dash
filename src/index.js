@@ -8,7 +8,7 @@ import { ConnectedRouter } from "connected-react-router";
 import createStore from "./store";
 import * as serviceWorker from "./serviceWorker";
 import 'react-quill/dist/quill.snow.css';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 import "./app/styles/main.scss";
 import App from "./app";
 import rootSaga from "./rootSagas";

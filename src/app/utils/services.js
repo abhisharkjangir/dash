@@ -6,7 +6,7 @@ const ApiService = ({ method = "GET", url, data, appendUrl = '' }) => {
   return new Promise((resolve, reject) => {
     axios({ url, method, data })
       .then(response => {
-        resolve({ response });
+        resolve({ ...response });
       })
       .catch(err => {
         reject(err);

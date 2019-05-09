@@ -16,15 +16,15 @@ function* login(payload) {
   try {
     yield put(loggingIn(true));
     yield put(showLoader("Logging In...Please wait!"));
-    const { response } = yield call(ApiService, {
+    const {
+      data: { data, success, message }
+    } = yield call(ApiService, {
       method: "POST",
       url: "login",
       data: payload.data
     });
 
-    if (response.data.success) {
-      const data = response.data.data;
-
+    if (success) {
       setLocalStorage("isLoggedIn", true);
       setLocalStorage("user", data);
       yield put(setAppData({ ...data, isLoggedIn: true }));
@@ -33,12 +33,11 @@ function* login(payload) {
       return yield put(fetchCategories());
     } else {
       yield put(hideLoader());
-      toast.error(response.data.message);
-      return yield put(loginError(response.data.message));
+      toast.error(message);
+      return yield put(loginError(message));
     }
   } catch (error) {
     yield put(hideLoader());
-
     toast.error(SOMETHING_WRONG);
     return yield put(loginError(error));
   }

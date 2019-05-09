@@ -10,17 +10,15 @@ import { FETCH_CATEGORIES } from "./appConstants";
 function* fetchCategories(payload) {
   try {
     yield put(fetchingCategories());
-
-    const { response } = yield call(ApiService, {
+    const { data:{data, success, message} } = yield call(ApiService, {
       method: "GET",
       url: "categories"
     });
 
-    if (response.data.success) {
-      const data = response.data.data;
+    if (success) {
       return yield put(fetchCategoriesSuccess(data));
     } else {
-      return yield put(fetchCategoriesError(response.data.message));
+      return yield put(fetchCategoriesError(message));
     }
   } catch (error) {
     return yield put(fetchCategoriesError(error));

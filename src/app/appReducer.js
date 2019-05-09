@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   isLoggedIn: false,
-  sidebar: false,
+  sidebar: true,
   loader: {
     value: false
   },

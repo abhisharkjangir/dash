@@ -16,16 +16,18 @@ import ApiService from "../../utils/services";
 function* fetchBlogsData(payload) {
   try {
     yield put(fetchingBlogs());
-    const { response } = yield call(ApiService, {
+    const {
+      data: { data, success, message }
+    } = yield call(ApiService, {
       method: "POST",
       url: "blogs",
       data: payload.data
     });
 
-    if (response.data.success) {
-      return yield put(fetchBlogsSuccess(response.data.data));
+    if (success) {
+      return yield put(fetchBlogsSuccess(data));
     } else {
-      return yield put(fetchBlogsError(response.data.message));
+      return yield put(fetchBlogsError(message));
     }
   } catch (err) {
     return yield put(fetchBlogsError(err));
@@ -36,16 +38,18 @@ function* fetchBlogsData(payload) {
 function* deleteBlogById(payload) {
   try {
     yield put(deletingBlog());
-    const { response } = yield call(ApiService, {
+    const {
+      data: { success, message }
+    } = yield call(ApiService, {
       method: "DELETE",
       url: "deleteBlog",
       appendUrl: `/${payload.data}`
     });
 
-    if (response.data.success) {
+    if (success) {
       return yield put(deleteBlogSuccess(payload.data));
     } else {
-      return yield put(deleteBlogError(response.data.message));
+      return yield put(deleteBlogError(message));
     }
   } catch (err) {
     return yield put(deleteBlogError(err));

@@ -17,7 +17,7 @@ class Header extends React.PureComponent {
           setLocalStorage("isLoggedIn", false);
           setLocalStorage("user", null);
           setAppData({ isLoggedIn: false });
-        } else toast.error(res.data.message);
+        }
       })
       .catch(err => {
         toast.error(SOMETHING_WRONG);
