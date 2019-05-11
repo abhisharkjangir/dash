@@ -5,8 +5,17 @@ import {
   updateFilters,
   deleteBlog
 } from "../blogs/blogsActions";
+import { createStructuredSelector } from "reselect";
+import { makeSelectBlogsData, makeSelectIsBlogsFetching, makeSelectIsBlogsDeleting, makeSelectIsBlogsFilters } from "./blogsSelectors";
+import { makeSelectCategories } from "../categories/categoriesSelectors";
 
-const mapStateToProps = state => ({ ...state.blogs, ...state.app });
+const mapStateToProps = createStructuredSelector({
+  data : makeSelectBlogsData,
+  isFetching : makeSelectIsBlogsFetching,
+  isDeleting : makeSelectIsBlogsDeleting,
+  filters :makeSelectIsBlogsFilters,
+  categories : makeSelectCategories
+});
 
 const mapDispatchToProps = dispatch => ({
   fetchBlogs: (payload) => dispatch(fetchBlogs(payload)),

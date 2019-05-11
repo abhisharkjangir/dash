@@ -279,7 +279,7 @@ class Blogs extends React.Component {
                   value={category}
                   onChange={this.onChangeHandler}
                   label="CATEGORY"
-                  options={categories.data}
+                  options={categories}
                 />
               </Col>
             </Row>

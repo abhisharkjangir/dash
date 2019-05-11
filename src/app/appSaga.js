@@ -1,32 +1,44 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import {
-  fetchingCategories,
-  fetchCategoriesSuccess,
-  fetchCategoriesError
+  loggingOut,
+  logoutSuccess,
+  logoutError
 } from "./appActions";
 import ApiService from "./utils/services";
-import { FETCH_CATEGORIES } from "./appConstants";
+import { LOGOUT } from "./appConstants";
+import { showLoader, hideLoader } from "./components/common/loader/loaderActions";
+import { toast } from "react-toastify";
+import { SOMETHING_WRONG } from "./constants/messages";
+import { setLocalStorage } from "./utils/common";
 
-function* fetchCategories(payload) {
+
+function* logout(payload) {
   try {
-    yield put(fetchingCategories());
-    const { data:{data, success, message} } = yield call(ApiService, {
+    yield put(showLoader('Logging out...Please wait!'))
+    yield put(loggingOut());
+    const { data:{success, message} } = yield call(ApiService, {
       method: "GET",
-      url: "categories"
+      url: "logout"
     });
 
     if (success) {
-      return yield put(fetchCategoriesSuccess(data));
+      setLocalStorage("isLoggedIn", false);
+      setLocalStorage("user", null);
+      yield put(hideLoader());
+      return yield put(logoutSuccess());
     } else {
-      return yield put(fetchCategoriesError(message));
+      yield put(hideLoader());
+      return yield put(logoutError(message));
     }
   } catch (error) {
-    return yield put(fetchCategoriesError(error));
+    yield put(hideLoader());
+    toast.error(SOMETHING_WRONG);
+    return yield put(logoutError(error));
   }
 }
 
 export function* appSaga() {
-  yield takeLatest(FETCH_CATEGORIES, fetchCategories);
+  yield takeLatest(LOGOUT, logout);
 }
 
 export default appSaga;

@@ -12,7 +12,7 @@ class App extends Component {
   componentWillMount() {
     const { storage, setAppData, fetchCategories } = this.props;
     if (storage.isLoggedIn && storage.user) {
-      setAppData({ isLoggedIn: true, ...storage.user });
+      setAppData({ isLoggedIn: true,});
       fetchCategories();
     } else {
       setAppData({ isLoggedIn: false });
@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, sidebar, loader } = this.props;
+    const { isLoggedIn, sidebar } = this.props;
     if (isLoggedIn) {
       return (
         <ErrorBoundary>
@@ -33,7 +33,7 @@ class App extends Component {
                 <div className={sidebar ? "main" : "main-no-sidebar"}>
                   <Routes />
                 </div>
-                <Loader loader={loader} />
+                <Loader />
                 <Footer sidebar={sidebar} />
               </div>
             </div>
@@ -52,7 +52,7 @@ class App extends Component {
                 </div>
               </div>
             </div>
-            <Loader loader={loader} />
+            <Loader />
           </ScrollToTop>
         </ErrorBoundary>
       );

@@ -2,7 +2,8 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import ApiService from "../../utils/services";
 import { addingBlog, addBlogSuccess, addBlogError } from "./addBlogActions";
 import { ADD_BLOG } from "./addBlogConstants";
-import { showLoader, hideLoader } from "../../appActions";
+import { showLoader, hideLoader } from "../../components/common/loader/loaderActions";
+
 
 // Fetch All Blogs from API
 function* addBlog(payload) {

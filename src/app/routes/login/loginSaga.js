@@ -2,15 +2,12 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { LOGIN } from "./loginConstants";
 import { loginError, loggingIn, loginSuccess } from "./loginActions";
 import ApiService from "../../utils/services";
-import {
-  setAppData,
-  fetchCategories,
-  showLoader,
-  hideLoader
-} from "../../appActions";
+import { setAppData } from "../../appActions";
+import { showLoader, hideLoader } from '../../components/common/loader/loaderActions';
 import { setLocalStorage } from "../../utils/common";
 import { toast } from "react-toastify";
 import { SOMETHING_WRONG } from "../../constants/messages";
+import { fetchCategory } from "../categories/categoriesActions";
 
 function* login(payload) {
   try {
@@ -27,10 +24,10 @@ function* login(payload) {
     if (success) {
       setLocalStorage("isLoggedIn", true);
       setLocalStorage("user", data);
-      yield put(setAppData({ ...data, isLoggedIn: true }));
-      yield put(loginSuccess(data));
+      yield put(setAppData({isLoggedIn: true }));
+      yield put(loginSuccess());
       yield put(hideLoader());
-      return yield put(fetchCategories());
+      return yield put(fetchCategory());
     } else {
       yield put(hideLoader());
       toast.error(message);
