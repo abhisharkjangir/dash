@@ -1,13 +1,8 @@
 import React from "react";
-import QueryString from "query-string";
 import Page from "../../components/page";
 import "./categories.scss";
 import Meta from "../../constants/meta";
-import Form from "../../components/common/form";
-import Input from "../../components/common/input";
-import { cleanObject } from "../../utils/common";
 import PageHeading from "../../components/common/pageHeading";
-import { Row, Col, ContainerFluid } from "../../components/layout";
 import Button from "../../components/common/button";
 
 class Categories extends React.Component {
@@ -50,7 +45,7 @@ class Categories extends React.Component {
     this.props.fetchCategory();
   }
 
-  renderBlogsTable = () => {
+  renderCategoriesTable = () => {
     const { data, isFetching } = this.props;
 
     if (isFetching) {
@@ -107,76 +102,6 @@ class Categories extends React.Component {
     }
   };
 
-  onChangeHandler = e => {
-    e.preventDefault();
-    const { updateFilters, history, filters, location } = this.props;
-    let name, value;
-    if (e.type === "multiSelectOption") {
-      name = e.detail.name;
-      value = e.detail.value;
-    } else {
-      name = e.target.name;
-      value = e.target.value;
-    }
-    const filter = {
-      [name]: value
-    };
-    const payload = { ...filters, ...filter };
-    updateFilters(payload);
-    history.replace({
-      path: location.pathname,
-      search: QueryString.stringify(cleanObject(payload))
-    });
-    this.filterDebounce();
-  };
-
-  renderFilterMessage = () => {
-    const { data, isFetching } = this.props;
-    let message;
-    if (isFetching) {
-      message = "Loading... Please wait.";
-    } else {
-      if (data && data.length) {
-        message = `Showing ${data.length} result(s)`;
-      } else {
-        message = `Sorry, no data found.`;
-      }
-    }
-
-    return (
-      <Row>
-        <Col>
-          <div className="message">{message}</div>
-        </Col>
-      </Row>
-    );
-  };
-
-  renderFilterView = () => {
-    const { filters } = this.props;
-    const { title } = filters;
-    return (
-      <div className="filter-view">
-        <Form autoComplete="off" onSubmit={this.onChangeHandler}>
-          <ContainerFluid>
-            <Row>
-              <Col xs={12} sm={6} lg={6}>
-                <Input
-                  id="title"
-                  name="title"
-                  value={title}
-                  onChange={this.onChangeHandler}
-                  label="SEARCH BLOGS BY NAME/CATEGORY"
-                />
-              </Col>
-            </Row>
-            {this.renderFilterMessage()}
-          </ContainerFluid>
-        </Form>
-      </div>
-    );
-  };
-
   renderPageHeader = () => {
     return (
       <div className="page-header">
@@ -192,7 +117,7 @@ class Categories extends React.Component {
         <div className="categories-page">
           <PageHeading text="Dashboard &#8226; Categories" />
           {this.renderPageHeader()}
-          {this.renderBlogsTable()}
+          {this.renderCategoriesTable()}
         </div>
       </Page>
     );

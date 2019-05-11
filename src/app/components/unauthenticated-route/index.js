@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import { Route, Redirect } from 'react-router-dom';
+import { makeSelectIsLoggedIn } from '../../appSelectors';
+import { createStructuredSelector } from 'reselect';
 
 const UnauthenticatedRoute = ({ component: Component, ...rest }) => {
   let query = queryString.parse(rest.location.search);
@@ -20,8 +22,8 @@ const UnauthenticatedRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  isLoggedIn: state.app.isLoggedIn
+const mapStateToProps = createStructuredSelector({
+  isLoggedIn: makeSelectIsLoggedIn()
 });
 
 export default connect(

@@ -1,12 +1,19 @@
-import { connect } from 'react-redux';
-import Header from './header';
-import { setAppData } from '../../appActions';
+import { connect } from "react-redux";
+import Header from "./header";
+import { setAppData, logout } from "../../appActions";
+import { createStructuredSelector } from "reselect";
+import { makeSelectSidebar } from "../../appSelectors";
 
-const mapStateToProps = (state) => ({...state.app});
-
-const mapDispatchToProps = (dispatch) => ({
-  setAppData: (data) => dispatch(setAppData(data))
+const mapStateToProps = createStructuredSelector({
+  sidebar: makeSelectSidebar()
 });
 
-export default connect(mapStateToProps , mapDispatchToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  setAppData: data => dispatch(setAppData(data)),
+  logout: () => dispatch(logout())
+});
 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

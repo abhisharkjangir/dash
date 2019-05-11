@@ -13,7 +13,6 @@ import Form from "../../components/common/form";
 import Button from "../../components/common/button";
 import { PUBLISH, PUBLISHED_BY, FEATURED, TRENDING } from "../../constants";
 import { toast } from "react-toastify";
-import { showLoader } from "../../appActions";
 
 class AddBlog extends React.PureComponent {
   onChangeHandler = e => {
@@ -54,6 +53,8 @@ class AddBlog extends React.PureComponent {
       publishedBy,
       isTrending
     } = formData;
+
+    console.log(formData);
 
     return (
       <div className="blog-form">
@@ -104,7 +105,7 @@ class AddBlog extends React.PureComponent {
                 value={category}
                 name="category"
                 onChange={this.onChangeHandler}
-                options={categories.data}
+                options={categories}
               />
             </Col>
             <Col xs={12} lg={12}>

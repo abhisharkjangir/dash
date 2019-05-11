@@ -1,4 +1,4 @@
-  import { combineReducers } from "redux";
+import { combineReducers } from "redux-immutable";
 
 // App Reducer
 import { APP_STATE_KEY } from "./app/appConstants";
@@ -24,8 +24,14 @@ import CategoriesReducer from "./app/routes/categories/categoriesReduer";
 import { ADD_BLOG_STATE_KEY } from "./app/routes/addblog/addBlogConstants";
 import AddBlogReducer from "./app/routes/addblog/addBlogReducer";
 
+// Loader Reducer
+import { LOADER_STATE_KEY } from "./app/components/common/loader/loaderConstants";
+import loaderReducer from "./app/components/common/loader/loaderReducer";
+
+
 export default combineReducers({
   [APP_STATE_KEY]: AppReducer,
+  [LOADER_STATE_KEY]: loaderReducer,
   [HOME_STATE_KEY]: HomeReducer,
   [LOGIN_STATE_KEY]: LoginReducer,
   [BLOGS_STATE_KEY]: BlogsReducer,

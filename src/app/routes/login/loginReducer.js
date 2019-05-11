@@ -1,17 +1,17 @@
 import { LOGIN_SUCCESS, LOGIN_ERROR, LOGGING_IN } from "./loginConstants";
+import { fromJS } from "immutable";
 
-const initialState = {
+const initialState = fromJS({
   isLoggingIn: false
-};
+});
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGGING_IN:
-      return { isLoggingIn: action.value };
+      return state.set('isLoggingIn', action.value);
     case LOGIN_SUCCESS:
-      return { ...state, ...action.data, isLoggingIn: false };
     case LOGIN_ERROR:
-      return { ...state, ...action.data, isLoggingIn: false };
+      return state.set('isLoggingIn', false).merge(action.data);
     default:
       return state;
   }

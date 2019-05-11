@@ -1,6 +1,15 @@
 import { connect } from "react-redux";
 import Loader from "./loader";
-const mapStateToProps = state => ({ loader: state.app.loader });
+import { createStructuredSelector } from "reselect";
+import {
+  makeSelectLoaderValue,
+  makeSelectLoaderMessage
+} from "./loaderSelectors";
+
+const mapStateToProps = createStructuredSelector({
+  value: makeSelectLoaderValue(),
+  message: makeSelectLoaderMessage()
+});
 
 export default connect(
   mapStateToProps,

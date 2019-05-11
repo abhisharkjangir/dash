@@ -4,7 +4,7 @@ import { render, hydrate } from "react-dom";
 import { Provider } from "react-redux";
 import Loadable from "react-loadable";
 import { Frontload } from "react-frontload";
-import { ConnectedRouter } from "connected-react-router";
+import { Router } from "react-router-dom";
 import createStore from "./store";
 import * as serviceWorker from "./serviceWorker";
 import 'react-quill/dist/quill.snow.css';
@@ -26,11 +26,11 @@ store.runSaga(rootSaga);
 // Let's also let React Frontload explicitly know we're not rendering on the server here
 const Application = (
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <Router history={history}>
       <Frontload noServerRender={true}>
         <App />
       </Frontload>
-    </ConnectedRouter>
+    </Router>
   </Provider>
 );
 

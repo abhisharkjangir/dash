@@ -41,6 +41,7 @@ class Login extends React.Component {
   render() {
     const { username, password } = this.state;
     const { isLoggingIn } = this.props;
+
     return (
       <Page {...Meta.login}>
         <div className="login-page">

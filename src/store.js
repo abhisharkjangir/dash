@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import { connectRouter, routerMiddleware } from "connected-react-router";
+import { routerMiddleware } from "connected-react-router";
 import { createBrowserHistory, createMemoryHistory } from "history";
 import createSagaMiddleware from "redux-saga";
+import { fromJS } from 'immutable';
 import rootReducer from "./rootReducer";
 import { isServer } from "./app/utils/common";
+
 export default (url = "/") => {
   // Create a history depending on the environment
   const history = isServer
@@ -40,8 +42,8 @@ export default (url = "/") => {
 
   // Create the store
   const store = createStore(
-    connectRouter(history)(rootReducer),
-    initialState,
+    rootReducer,
+    fromJS(initialState),
     composedEnhancers
   );
   store.runSaga = sagaMiddleware.run;
