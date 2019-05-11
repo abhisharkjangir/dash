@@ -6,6 +6,8 @@ const APIS = {
   addBlog: "story/add",
   updateBlog:"story/update",
   categories: "categories",
+  addCategory:"category/add",
+  deleteCategory:"/category/delete",
   blogDetails: "story"
 };
 
