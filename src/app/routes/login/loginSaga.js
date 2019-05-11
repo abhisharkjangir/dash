@@ -6,7 +6,6 @@ import { setAppData } from "../../appActions";
 import { showLoader, hideLoader } from '../../components/common/loader/loaderActions';
 import { setLocalStorage } from "../../utils/common";
 import { toast } from "react-toastify";
-import { SOMETHING_WRONG } from "../../constants/messages";
 import { fetchCategory } from "../categories/categoriesActions";
 
 function* login(payload) {
@@ -35,7 +34,6 @@ function* login(payload) {
     }
   } catch (error) {
     yield put(hideLoader());
-    toast.error(SOMETHING_WRONG);
     return yield put(loginError(error));
   }
 }

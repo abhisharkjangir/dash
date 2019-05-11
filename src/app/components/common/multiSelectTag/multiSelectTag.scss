@@ -9,16 +9,19 @@
     min-height: 38px;
     padding-top: 4px;
     .tag {
+      display: flex;
+      align-items: center;
       font-size: var(--font-size-12);
       background-color: var(--color-grey);
       width: auto;
       padding: 5px;
+      text-transform: capitalize;
       margin-bottom: 5px;
       margin-right: 5px;
       border-radius: 2px;
       cursor: pointer;
     }
-    .active {
+    .tag:hover, .active {
       color: var(--color-white);
       background-color: var(--color-blue);
     }

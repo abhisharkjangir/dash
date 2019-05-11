@@ -26,17 +26,15 @@ class Categories extends React.Component {
         getValue: category => category.name
       },
       {
-        name: "Action",
+        name: "",
         key: "publishedBy",
         getValue: category => (
-          <>
-            <span className="edit" onClick={() => this.editCategory(category)}>
-              Edit
-            </span>
-            <span className="delete" onClick={() => this.deleteCategory(category)}>
-              Delete
-            </span>
-          </>
+          <span
+            className="delete"
+            onClick={() => this.deleteCategory(category)}
+          >
+            Delete
+          </span>
         )
       }
     ];
@@ -46,24 +44,24 @@ class Categories extends React.Component {
     this.props.fetchCategory();
   }
 
-  deleteCategory = (category) => {
+  deleteCategory = category => {
     // eslint-disable-next-line no-restricted-globals
-    let confirmation = confirm(`Are you sure you want to delete "${category.name}" blog?`);
-    if(confirmation) {
+    let confirmation = confirm(
+      `Are you sure you want to delete "${category.name}" blog?`
+    );
+    if (confirmation) {
       this.props.deleteCategory(category._id);
     }
-  }
+  };
 
-  editCategory = (category) => {
-
-  }
+  editCategory = category => {};
 
   addCategory = () => {
-    const name = prompt('Enter Category Name *');
-    if(name && name.length > 0) {
-      this.props.addCategory({name});
-    } else toast.error('Please enter a valid category name.');
-  }
+    const name = prompt("Enter Category Name *");
+    if (name && name.length > 0) {
+      this.props.addCategory({ name });
+    } else toast.error("Please enter a valid category name.");
+  };
 
   renderCategoriesTable = () => {
     const { data, isFetching } = this.props;

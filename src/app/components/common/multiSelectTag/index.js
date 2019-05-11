@@ -1,7 +1,7 @@
 import React from "react";
 import "./multiSelectTag.scss";
 import Wrapper from "../wrapper";
-
+import Icon from '../Icon';
 class MultiSelectTag extends React.Component {
   clickHandler = option => {
     const { value, name, onChange, uniqueKey } = this.props;
@@ -30,7 +30,8 @@ class MultiSelectTag extends React.Component {
       value,
       label,
       options,
-      uniqueKey
+      uniqueKey,
+      addNewItem
     } = this.props;
     return (
       <Wrapper className="mb-3 multi-select-tag">
@@ -46,6 +47,9 @@ class MultiSelectTag extends React.Component {
                 {op.name}
               </span>
             ))}
+            {addNewItem && <span onClick={addNewItem} className='tag active'>
+              <Icon name='plus'/>
+            </span>}
         </div>
       </Wrapper>
     );

@@ -6,12 +6,12 @@ const STAG_ENV = {
 };
 
 const PROD_ENV = {
-  URL: "http://18.224.169.160:8080/",
+  URL: "http://api.abhijangir.me/",
   env: "Production"
 };
 
 const LOCAL_ENV = {
-  URL: "http://192.168.30.83:5000/",
+  URL: "http://localhost:5000/",
   env: "Local"
 };
 

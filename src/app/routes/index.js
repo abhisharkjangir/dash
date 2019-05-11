@@ -45,6 +45,11 @@ const AddBlog = Loadable({
   loading: () => null
 });
 
+const Tagging = Loadable({
+  loader: () => import(/* webpackChunkName: "tagging" */ "./tagging"),
+  loading: () => null
+});
+
 export default () => (
   <Switch>
     <AuthenticatedRoute exact path="/" component={Home} />
@@ -52,6 +57,7 @@ export default () => (
     <AuthenticatedRoute path="/blogs" component={Blogs} />
     <AuthenticatedRoute path="/blog/edit/:blogId" component={AddBlog} />
     <AuthenticatedRoute path="/blog/add" component={AddBlog} />
+    <AuthenticatedRoute path="/tagging" component={Tagging} />
     <UnauthenticatedRoute path="/signup" component={Signup} />
     <UnauthenticatedRoute path="/login" component={Login} />
     <UnauthenticatedRoute path="/forgotpassword" component={ForgotPassword} />

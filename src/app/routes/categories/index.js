@@ -13,7 +13,7 @@ import {
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectCategories,
-  isFetching: makeSelectCategoryisFetching
+  isFetching: makeSelectCategoryisFetching,
 });
 
 const mapDispatchToProps = dispatch => ({

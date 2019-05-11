@@ -20,6 +20,7 @@ import { Row, Col, ContainerFluid } from "../../components/layout";
 import Select from "../../components/common/select";
 import MultiSelectTag from "../../components/common/multiSelectTag";
 import ConfirmationModal from "../../components/common/confirmationModal";
+import { toast } from "react-toastify";
 
 class Blogs extends React.Component {
   constructor(props) {
@@ -110,14 +111,13 @@ class Blogs extends React.Component {
   deleteBlog = blog => {
     const blogId = pathOr(null, "_id", blog);
     if (blogId) {
-      this.setState({
-        confirmationModal: {
-          isOpen: true,
-          title: "Delete Blog",
-          message: `Are you sure you want to delete "${blog.title}" blog?`,
-          item: blog
-        }
-      });
+      // eslint-disable-next-line no-restricted-globals
+      let response = confirm(
+        `Are you sure you want to delete "${blog.title}" blog?`
+      );
+      if (response) {
+        this.props.deleteBlog(blogId);
+      }
     }
   };
 
@@ -210,6 +210,13 @@ class Blogs extends React.Component {
     this.filterDebounce();
   };
 
+  addCategory = () => {
+    const name = prompt("Enter Category Name *");
+    if (name && name.length > 0) {
+      this.props.addCategory({ name });
+    } else toast.error("Please enter a valid category name.");
+  };
+
   renderFilterMessage = () => {
     const { data, isFetching } = this.props;
     let message;
@@ -280,6 +287,7 @@ class Blogs extends React.Component {
                   onChange={this.onChangeHandler}
                   label="CATEGORY"
                   options={categories}
+                  addNewItem={this.addCategory}
                 />
               </Col>
             </Row>

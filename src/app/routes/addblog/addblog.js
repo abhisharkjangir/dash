@@ -54,6 +54,13 @@ class AddBlog extends React.PureComponent {
     updateFormData({ [name]: value });
   };
 
+  addCategory = () => {
+    const name = prompt('Enter Category Name *');
+    if(name && name.length > 0) {
+      this.props.addCategory({name});
+    } else toast.error('Please enter a valid category name.');
+  }
+
   renderPageHeader = () => {
     return (
       <div className="page-header">
@@ -129,6 +136,7 @@ class AddBlog extends React.PureComponent {
                 name="category"
                 onChange={this.onChangeHandler}
                 options={categories}
+                addNewItem={this.addCategory}
               />
             </Col>
             <Col xs={12} lg={12}>

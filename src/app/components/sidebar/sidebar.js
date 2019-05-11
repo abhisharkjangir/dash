@@ -37,6 +37,11 @@ class Sidebar extends React.PureComponent {
                 Categories
               </Link>
             </li>
+            <li>
+              <Link to="/tagging" className={this.isActive("tagging")}>
+                Category Tagging
+              </Link>
+            </li>
           </ul>
         </div>
       );
