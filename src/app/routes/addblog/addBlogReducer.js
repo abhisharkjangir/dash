@@ -3,7 +3,10 @@ import {
   ADDING_BLOG,
   ADD_BLOG_SUCCESS,
   ADD_BLOG_ERROR,
-  UPDATE_FORM_DATA
+  UPDATE_FORM_DATA,
+  FETCHING_BLOG,
+  FETCH_BLOG_SUCCESS,
+  FETCH_BLOG_ERROR
 } from "./addBlogConstants";
 
 const formData = {
@@ -43,6 +46,12 @@ const AddBlogReducer = (state = initialState, { type, data }) => {
       return state.merge(initialState);
     case ADD_BLOG_ERROR:
       return state.set("isAdding", false).set("error", data);
+    case FETCHING_BLOG:
+      return state.set("isFetching", true);
+    case FETCH_BLOG_SUCCESS:
+      return state.merge({"isFetching": false, "formData": data});
+    case FETCH_BLOG_ERROR:
+      return state.set("isFetching", false).set("error", data);
     default:
       return state;
   }

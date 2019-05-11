@@ -1,5 +1,6 @@
 import React from "react";
 import "./addBlog.scss";
+import { pathOr } from "lodash/fp";
 import Page from "../../components/page";
 import Meta from "../../constants/meta";
 import PageHeading from "../../components/common/pageHeading";
@@ -15,6 +16,28 @@ import { PUBLISH, PUBLISHED_BY, FEATURED, TRENDING } from "../../constants";
 import { toast } from "react-toastify";
 
 class AddBlog extends React.PureComponent {
+  static getDerivedStateFromProps(props, state) {
+    const { match } = props;
+    const blogId = pathOr(null, "params.blogId", match);
+    if (blogId) {
+      return {
+        isEdit: true,
+        blogId
+      };
+    }
+    return null;
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    const { isEdit, blogId } = this.state;
+    if (isEdit) this.props.fetchBlog(blogId);
+  }
+
   onChangeHandler = e => {
     let name, value;
     const { updateFormData } = this.props;
@@ -51,10 +74,9 @@ class AddBlog extends React.PureComponent {
       isFeatured,
       story,
       publishedBy,
-      isTrending
+      isTrending,
+      imageSrc
     } = formData;
-
-    console.log(formData);
 
     return (
       <div className="blog-form">
@@ -92,6 +114,7 @@ class AddBlog extends React.PureComponent {
               <FileBrowser
                 id="image"
                 label="Image"
+                uploadedImage={imageSrc}
                 selectedImage={image}
                 name="image"
                 accept="image/*"
@@ -161,7 +184,7 @@ class AddBlog extends React.PureComponent {
             <Col lg={4} />
             <Col lg={4}>
               <Button
-                label="Add Blog"
+                label="SAVE BLOG"
                 onClick={this.addBlog}
                 disabled={isAdding}
               />
@@ -176,6 +199,7 @@ class AddBlog extends React.PureComponent {
   addBlog = e => {
     e.preventDefault();
     const { addBlog, formData, history } = this.props;
+    const { isEdit } = this.state;
     const blog = formData;
     let isFormInvalid = false;
     Object.keys(blog).forEach(key => {
@@ -194,14 +218,14 @@ class AddBlog extends React.PureComponent {
     Object.keys(blog).forEach(key => {
       blogFormData.append(key, blog[key]);
     });
-    addBlog(blogFormData, history);
+    addBlog(blogFormData, { history, isEdit });
   };
 
   render() {
     return (
       <Page {...Meta.addBlog}>
         <div className="add-blog-page">
-          <PageHeading text="Dashboard &#8226; Blogs &#8226; Add New Blog" />
+          <PageHeading text="Dashboard &#8226; Blogs &#8226; Save Blog" />
           {this.renderPageHeader()}
           {this.renderBlogForm()}
         </div>

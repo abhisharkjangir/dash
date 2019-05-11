@@ -50,6 +50,7 @@ export default () => (
     <AuthenticatedRoute exact path="/" component={Home} />
     <AuthenticatedRoute path="/categories" component={Categories} />
     <AuthenticatedRoute path="/blogs" component={Blogs} />
+    <AuthenticatedRoute path="/blog/edit/:blogId" component={AddBlog} />
     <AuthenticatedRoute path="/blog/add" component={AddBlog} />
     <UnauthenticatedRoute path="/signup" component={Signup} />
     <UnauthenticatedRoute path="/login" component={Login} />

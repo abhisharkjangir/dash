@@ -72,7 +72,7 @@ class Blogs extends React.Component {
         getValue: blog => (
           <>
             <LinkButton
-              to={`/blog/${blog._id}`}
+              to={`/blog/edit/${blog._id}`}
               label="Edit"
               className="edit"
             />
