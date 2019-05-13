@@ -28,7 +28,11 @@ import AddBlogReducer from "./app/routes/addblog/addBlogReducer";
 import { LOADER_STATE_KEY } from "./app/components/common/loader/loaderConstants";
 import loaderReducer from "./app/components/common/loader/loaderReducer";
 
+// Tagging Reducer
+import { TAGGING_STATE_KEY } from "./app/routes/tagging/taggingConstants";
+import taggingReducer from "./app/routes/tagging/taggingReducer";
 
+// Combine All Reducers
 export default combineReducers({
   [APP_STATE_KEY]: AppReducer,
   [LOADER_STATE_KEY]: loaderReducer,
@@ -37,4 +41,5 @@ export default combineReducers({
   [BLOGS_STATE_KEY]: BlogsReducer,
   [CATEGORIES_STATE_KEY]: CategoriesReducer,
   [ADD_BLOG_STATE_KEY]:AddBlogReducer,
+  [TAGGING_STATE_KEY] : taggingReducer
 });

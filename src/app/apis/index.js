@@ -7,8 +7,9 @@ const APIS = {
   updateBlog:"story/update",
   categories: "categories",
   addCategory:"category/add",
-  deleteCategory:"/category/delete",
-  blogDetails: "story"
+  deleteCategory:"category/delete",
+  blogDetails: "story",
+  allblogs: "stories"
 };
 
 const getApiEndPoint = name => {
