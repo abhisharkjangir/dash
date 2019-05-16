@@ -3,6 +3,15 @@ import "./fileBrowser.scss";
 import Wrapper from "../wrapper";
 
 class FileBrowser extends React.PureComponent {
+  static getDerivedStateFromProps(props, state) {
+    const { uploadedImage } = props;
+    const { imageUrl } = state;
+    if(imageUrl === "" && uploadedImage && uploadedImage.length > 0 ){
+      return { imageUrl: uploadedImage };
+    }
+    return null;
+  }
+
   constructor() {
     super();
     this.state = {
@@ -15,7 +24,7 @@ class FileBrowser extends React.PureComponent {
     if (file && file !== "" && file !== null) {
       const reader = new FileReader();
       reader.onload = function(e) {
-        self.setState({ imageUrl: e.target.result });
+        self.setState({ imageUrl: e.target.result, file });
       };
       reader.readAsDataURL(file);
     }

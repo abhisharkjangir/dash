@@ -4,6 +4,7 @@ import "./categories.scss";
 import Meta from "../../constants/meta";
 import PageHeading from "../../components/common/pageHeading";
 import Button from "../../components/common/button";
+import { toast } from "react-toastify";
 
 class Categories extends React.Component {
   constructor(props) {
@@ -25,17 +26,15 @@ class Categories extends React.Component {
         getValue: category => category.name
       },
       {
-        name: "Action",
+        name: "",
         key: "publishedBy",
-        getValue: blog => (
-          <>
-            <span className="edit" onClick={() => this.deleteBlog(blog)}>
-              Edit
-            </span>
-            <span className="delete" onClick={() => this.deleteBlog(blog)}>
-              Delete
-            </span>
-          </>
+        getValue: category => (
+          <span
+            className="delete"
+            onClick={() => this.deleteCategory(category)}
+          >
+            Delete
+          </span>
         )
       }
     ];
@@ -44,6 +43,25 @@ class Categories extends React.Component {
   componentWillMount() {
     this.props.fetchCategory();
   }
+
+  deleteCategory = category => {
+    // eslint-disable-next-line no-restricted-globals
+    let confirmation = confirm(
+      `Are you sure you want to delete "${category.name}" blog?`
+    );
+    if (confirmation) {
+      this.props.deleteCategory(category._id);
+    }
+  };
+
+  editCategory = category => {};
+
+  addCategory = () => {
+    const name = prompt("Enter Category Name *");
+    if (name && name.length > 0) {
+      this.props.addCategory({ name });
+    } else toast.error("Please enter a valid category name.");
+  };
 
   renderCategoriesTable = () => {
     const { data, isFetching } = this.props;
@@ -106,7 +124,7 @@ class Categories extends React.Component {
     return (
       <div className="page-header">
         <h1>Categories</h1>
-        <Button label="Add New Category" />
+        <Button onClick={this.addCategory} label="Add New Category" />
       </div>
     );
   };

@@ -1,7 +1,11 @@
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import Categories from "./categories";
-import { fetchCategory } from "./categoriesActions";
+import {
+  fetchCategory,
+  addCategory,
+  deleteCategory
+} from "./categoriesActions";
 import {
   makeSelectCategories,
   makeSelectCategoryisFetching
@@ -9,11 +13,13 @@ import {
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectCategories,
-  isFetching: makeSelectCategoryisFetching
+  isFetching: makeSelectCategoryisFetching,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchCategory: data => dispatch(fetchCategory(data))
+  fetchCategory: data => dispatch(fetchCategory(data)),
+  addCategory: data => dispatch(addCategory(data)),
+  deleteCategory: data => dispatch(deleteCategory(data))
 });
 
 export default connect(

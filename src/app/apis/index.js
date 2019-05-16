@@ -4,8 +4,12 @@ const APIS = {
   blogs: "stories/filter",
   deleteBlog: "story/delete",
   addBlog: "story/add",
+  updateBlog:"story/update",
   categories: "categories",
-  blogDetails: "story"
+  addCategory:"category/add",
+  deleteCategory:"category/delete",
+  blogDetails: "story",
+  allblogs: "stories"
 };
 
 const getApiEndPoint = name => {
