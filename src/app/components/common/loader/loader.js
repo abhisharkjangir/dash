@@ -2,7 +2,15 @@ import React from "react";
 import "./loader.scss";
 const Loader = ({ value, message }) => {
   return value ? (
-    <div className="loader">{message || "Loading... Please wait!"}</div>
+    <div className="loader">
+        <div className='bars'>
+            <div className="loading-bar"></div>
+            <div className="loading-bar"></div>
+            <div className="loading-bar"></div>
+            <div className="loading-bar"></div>
+        </div>
+        {message || "Loading... Please wait!"}
+    </div>
   ) : null;
 };
 

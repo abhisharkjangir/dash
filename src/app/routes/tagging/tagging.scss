@@ -71,9 +71,10 @@
           width: 38px;
           left: 0;
           font-size: 25px;
+          font-weight: 100;
           cursor: pointer;
           bottom: 0;
-          background:var(--color-grey);
+          border-right: 1px solid var(--color-grey);
           color: var(--color-black);
           display: flex;
           justify-content: center;

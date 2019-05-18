@@ -29,17 +29,17 @@ class Sidebar extends React.PureComponent {
             </li>
             <li>
               <Link to="/blogs" className={this.isActive("blog")}>
-                Blogs
+               Manage Blogs
               </Link>
             </li>
             <li>
               <Link to="/categories" className={this.isActive("categories")}>
-                Categories
+              Manage Categories
               </Link>
             </li>
             <li>
               <Link to="/tagging" className={this.isActive("tagging")}>
-                Category Tagging
+                Category-Blog Tagging
               </Link>
             </li>
           </ul>

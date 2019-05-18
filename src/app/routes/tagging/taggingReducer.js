@@ -3,7 +3,10 @@ import {
   FETCHING_BLOGS,
   FETCH_BLOGS_SUCCESS,
   FETCH_BLOGS_ERROR,
-  SELECT_CATEGORY
+  SELECT_CATEGORY,
+  UPDATING_BLOG,
+  UPDATE_BLOG_ERROR,
+  UPDATE_BLOG_SUCCESS
 } from "./taggingConstants";
 
 const initialState = fromJS({
@@ -20,12 +23,20 @@ const taggingReducer = (state = initialState, { type, data }) => {
     case FETCH_BLOGS_SUCCESS:
       return state.set("isFetching", false).set("data", data);
     case FETCH_BLOGS_ERROR:
+    case UPDATE_BLOG_ERROR:
       return state
         .set("isFetching", false)
-        .set("data", [])
+        .set("isUpdating", true)
         .set("error", data);
     case SELECT_CATEGORY:
-    return state.set("selectedCategory", data);
+      return state.set("selectedCategory", data);
+    case UPDATING_BLOG:
+      return state.set("isUpdating", true);
+    case UPDATE_BLOG_SUCCESS:
+      let blogs = state
+        .get("data")
+        .map(blog => (blog._id === data._id ? data : blog));
+      return state.set("isUpdating", false).set("data", blogs);
     default:
       return state;
   }
