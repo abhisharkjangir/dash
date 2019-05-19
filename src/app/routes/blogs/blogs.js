@@ -302,7 +302,7 @@ class Blogs extends React.Component {
     return (
       <div className="page-header">
         <h1>Blogs</h1>
-        <LinkButton to="/blog/add" label="Add New Blog" />
+        <LinkButton to="/blogs/add" label="Add New Blog" />
       </div>
     );
   };

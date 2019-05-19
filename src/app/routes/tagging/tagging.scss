@@ -21,28 +21,32 @@
     display: flex;
     .category-list {
       width: 185px;
-      margin-right:15px;
+      margin-right:30px;
       list-style: none;
       padding-inline-start: 0;
       li {
-        transition: all .2s ease;
         cursor: pointer;
         padding: 10px 0px;
         font-size: var(--font-size-12);
         margin-bottom: 1px;
-
-      }
-      li:hover {
-        transition: all .2s ease;
+        text-transform: capitalize;
         padding: 10px 15px;
-        // color: var(--color-black);
-        // background-color: var(--color-grey);
       }
       .active {
-        transition: all .2s ease;
         padding: 10px 15px;
         background-color: var(--color-blue);
         color: var(--color-white);
+        border-radius: 2px;
+        position: relative;
+        .right-arrow {
+          width: 0px;
+          border-width: 11px;
+          border-color: transparent transparent transparent var(--color-blue);
+          border-style: solid;
+          right: -22px;
+          position: absolute;
+          top: 9px;
+        }
       }
       p {
         margin: 0;

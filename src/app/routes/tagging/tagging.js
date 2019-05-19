@@ -58,6 +58,7 @@ class Home extends React.PureComponent {
     const newBlogFormData = new FormData();
     Object.keys(blogData).map(key => {
       newBlogFormData.append(key, blogData[key]);
+      return key;
     });
     updateBlog(newBlogFormData, { blogData });
   };
@@ -67,7 +68,7 @@ class Home extends React.PureComponent {
       <div className="page-header">
         <h1>Category - Blog Tagging</h1>
         <LinkButton
-          to="/blog/add"
+          to="/blogs/add"
           className="float-right"
           label="Add New Blog"
         />
@@ -91,13 +92,16 @@ class Home extends React.PureComponent {
         <p>Categories</p>
         {categories &&
           categories.map((cat, index) => (
+            <>
             <li
               key={cat._id}
               className={selectedCategory === cat._id ? "active" : ""}
               onClick={() => this.selectCategory(cat)}
             >
               {index + 1}. {cat.name}
+              {selectedCategory === cat._id && <span className='right-arrow'></span>}
             </li>
+            </>
           ))}
       </ul>
     );

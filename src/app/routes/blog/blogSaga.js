@@ -1,10 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import ApiService from "../../utils/services";
-
-import {
-  showLoader,
-  hideLoader
-} from "../../components/common/loader/loaderActions";
 import { FETCH_BLOG } from "./blogConstants";
 import { fetchingBlogs } from "../blogs/blogsActions";
 import { fetchBlogSuccess, fetchBlogError } from "./blogActions";

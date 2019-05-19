@@ -17,6 +17,7 @@ import {
 function* fetchAllBlogs() {
   try {
     yield put(fetchingBlogs());
+    yield put(showLoader('Loading...Please wait!'));
     const {
       data: { data, success, message }
     } = yield call(ApiService, {
@@ -25,11 +26,14 @@ function* fetchAllBlogs() {
     });
 
     if (success) {
+      yield put(hideLoader());
       return yield put(fetchBlogsSuccess(data));
     } else {
+      yield put(hideLoader());
       return yield put(fetchBlogsError(message));
     }
   } catch (err) {
+    yield put(hideLoader());
     return yield put(fetchBlogsError(err));
   }
 }
