@@ -6,6 +6,7 @@ import Meta from "../../constants/meta";
 import { Row, Col } from "../../components/layout";
 import { findValueById, formatDate } from "../../utils/common";
 import { TRENDING, FEATURED, PUBLISHED_BY, PUBLISH } from "../../constants";
+import LinkButton from "../../components/common/linkButton";
 
 class Blog extends React.PureComponent {
   static getDerivedStateFromProps(props, state) {
@@ -35,9 +36,11 @@ class Blog extends React.PureComponent {
   }
 
   renderPageHeader = () => {
+    const blogId = pathOr(null, 'data._id', this.props);
     return (
       <div className="page-header">
         <h1>Blog Detail</h1>
+        {blogId && <LinkButton to={`/blog/edit/${blogId}`} label="Edit" className='float-right' />}
       </div>
     );
   };
@@ -86,6 +89,7 @@ class Blog extends React.PureComponent {
     return (
       <div className="page-body">
         <Row>
+
           <Col lg="8">{this.contentBlock("title", title)}</Col>
           <Col lg="4">{this.contentBlock("author", author)}</Col>
         </Row>
@@ -153,7 +157,7 @@ class Blog extends React.PureComponent {
           <Col lg="12">
             {this.contentBlock(
               "Blog",
-              <span dangerouslySetInnerHTML={{ __html: story }} />,
+              <div className='blog-content' dangerouslySetInnerHTML={{ __html: story }} />,
               "bg-white"
             )}
           </Col>
