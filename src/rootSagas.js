@@ -5,7 +5,7 @@ import blogs from './app/routes/blogs/blogsSaga';
 import categories from './app/routes/categories/categoriesSaga';
 import addBlogSaga from './app/routes/addblog/addBlogSaga';
 import taggingSaga from './app/routes/tagging/taggingSaga';
-
+import blogSaga from './app/routes/blog/blogSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -15,5 +15,6 @@ export default function* rootSaga() {
     categories(),
     addBlogSaga(),
     taggingSaga(),
+    blogSaga(),
   ]);
 }

@@ -35,7 +35,7 @@ class AddBlog extends React.PureComponent {
 
   componentDidMount() {
     const { isEdit, blogId } = this.state;
-    if (isEdit) this.props.fetchBlog(blogId);
+    if (isEdit && blogId) this.props.fetchBlog(blogId);
   }
 
   onChangeHandler = e => {

@@ -8,7 +8,8 @@ body {
 }
 
 body {
-  font-family: "Varela Round", sans-serif;
+  font-family: "Varela Round", sans-serif;;
+  font-weight: 500;
   background-color: var(--color-white);
 }
 
@@ -89,4 +90,9 @@ button:active {
 }
 .fs-18 {
   font-size: var(--font-size-20);
+}
+
+// Background Colors ==================
+.bg-white {
+  background-color: var(--color-white);
 }

@@ -64,7 +64,7 @@ class QuillEditor extends React.PureComponent {
         <Wrapper className="mb-3">
           <label htmlFor={id}>{label}</label>
 
-          <ReactQuill
+          <ReactQuill theme="snow"
             value={value}
             onChange={this.changeHandler}
             modules={DefaultQuillModule}

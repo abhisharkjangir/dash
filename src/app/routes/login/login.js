@@ -49,7 +49,7 @@ class Login extends React.Component {
             <img src={LOGO} alt="logo" />
           </div>
           <div className="login-form-box">
-            <Form autoComplete="off" onSubmit={this.login}>
+            <Form autoComplete="on" onSubmit={this.login}>
               <Input
                 id="username"
                 type="text"

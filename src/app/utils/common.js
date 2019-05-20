@@ -1,4 +1,5 @@
 import QueryString from "query-string";
+import moment from "moment";
 
 // A nice helper to tell us if we're on the server
 export const isServer = !(
@@ -67,3 +68,11 @@ export const cleanObject = object => {
   }
   return cleanObject;
 };
+
+// Format Date
+export const formatDate = (date) => {
+  if(date) {
+    return moment(date).format('Do MMM, YYYY');
+  }
+  return null;
+}

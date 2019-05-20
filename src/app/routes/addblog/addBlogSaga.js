@@ -47,6 +47,7 @@ function* addBlog(payload) {
 function* fetchBlogDetail(payload) {
   try {
     yield put(fetchingBlog());
+    yield put(showLoader());
     const {
       data: { data, success, message }
     } = yield call(ApiService, {
@@ -55,11 +56,14 @@ function* fetchBlogDetail(payload) {
       appendUrl: `/${payload.data}`
     });
     if (success) {
+      yield put(hideLoader());
       return yield put(fetchBlogSuccess(data));
     } else {
+      yield put(hideLoader());
       return yield put(fetchBlogError(message));
     }
   } catch (err) {
+    yield put(hideLoader());
     return yield put(fetchBlogError(err));
   }
 }
