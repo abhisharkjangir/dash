@@ -1,16 +1,21 @@
 {
-  "short_name": "imabhi",
+  "short_name": "Admin",
   "name": ".",
   "description": "2.0",
   "icons": [
     {
-      "src": "https://s3.ap-south-1.amazonaws.com/imabhi.in/logo.png",
+      "src": "https://abhisharjangir.com/static/assets/logo512.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://abhisharjangir.com/static/assets/logo512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "start_url": "http://abhijangir.me/",
-  "display": "fullscreen",
-  "theme_color": "#ff005a",
+  "start_url": "admin.abhisharjangir.com",
+  "display": "standalone",
+  "theme_color": "#000",
   "background_color": "#ffffff"
 }

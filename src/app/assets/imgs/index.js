@@ -1,5 +1,5 @@
+import logo from "./logo192.png";
 const IMG_PATH = `https://s3.ap-south-1.amazonaws.com/imabhi.in/`;
-
 export const ABHISHAR = `${IMG_PATH}abhishar.png`;
 export const ANGULAR = `${IMG_PATH}angular.svg`;
 export const BG_IMG_1 = `${IMG_PATH}bgimg1.png`;
@@ -12,7 +12,7 @@ export const GITHUB = `${IMG_PATH}github-icon.svg`;
 export const HTML5 = `${IMG_PATH}html-5.svg`;
 export const INSTAGRAM = `${IMG_PATH}instagram-icon.svg`;
 export const JAVASCRIPT = `${IMG_PATH}javascript.svg`;
-export const LOGO = 'https://s3.ap-south-1.amazonaws.com/meuzicassets/meuzic-horizontal-transparent.png';
+export const LOGO = logo;
 export const MAP = `${IMG_PATH}map.png`;
 export const MEDZIN_LOGO = `${IMG_PATH}medzinlogo.png`;
 export const MM_LOGO = `${IMG_PATH}mmlogo.png`;

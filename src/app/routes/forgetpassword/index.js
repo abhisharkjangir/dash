@@ -7,7 +7,7 @@ import Form from "../../components/common/form";
 import Input from "../../components/common/input";
 import Button from "../../components/common/button";
 import LinkButton from "../../components/common/linkButton";
-import Separator from '../../components/common/separator';
+import Separator from "../../components/common/separator";
 
 const Login = () => (
   <Page {...Meta.forgetpassword}>
@@ -26,11 +26,19 @@ const Login = () => (
           />
           <Button label="SEND RESET LINK" className="" />
         </Form>
-        <Separator text='Or'/>
-        <LinkButton to='/login' label="Go back to login" className="text-center mt-3 d-block fs-14" />
+        <Separator text="Or" />
+        <LinkButton
+          to="/login"
+          label="Go back to login"
+          className="text-center mt-3 d-block fs-14"
+        />
       </div>
       <div className="forgetspassword-footer">
-        Made with <span role='img' aria-label='heart'>💖</span> by <a href="http://abhijangir.me">Abhishar Jangir.</a>
+        Made with{" "}
+        <span role="img" aria-label="heart">
+          💖
+        </span>{" "}
+        by <a href="http://abhisharjangir.com">Abhishar Jangir.</a>
       </div>
     </div>
   </Page>

@@ -1,17 +1,17 @@
 import CONST from "./index";
 
 const STAG_ENV = {
-  URL: "https://18.224.169.160:8080/",
+  URL: "https://api.abhisharjangir.com/",
   env: "Staging"
 };
 
 const PROD_ENV = {
-  URL: "https://api.abhijangir.me/",
+  URL: "https://api.abhisharjangir.com/",
   env: "Production"
 };
 
 const LOCAL_ENV = {
-  URL: "http://localhost:5000/",
+  URL: "https://api.abhisharjangir.com/",
   env: "Local"
 };
 

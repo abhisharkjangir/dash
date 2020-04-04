@@ -90,7 +90,7 @@ class Login extends React.Component {
             <span role="img" aria-label="heart">
               💖
             </span>{" "}
-            by <a href="http://abhijangir.me">Abhishar Jangir.</a>
+            by <a href="http://abhisharjangir.com">Abhishar Jangir.</a>
           </div>
         </div>
       </Page>
